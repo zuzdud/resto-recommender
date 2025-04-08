@@ -5,4 +5,4 @@ This project is a web application that helps users find the best restaurants bas
 ## Technologies Used
 - Django (Backend)
 - React (Frontend)
-- PostgreSQL (Database)
+- MariaDB (Database)
