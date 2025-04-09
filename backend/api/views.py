@@ -1,9 +1,12 @@
-from django.http import JsonResponse
-import requests
 import time
 
+import requests
+from django.http import JsonResponse
+from rest_framework import generics
+
 from backend import settings
-from .serializers import RestaurantSerializer
+from .serializers import RestaurantSerializer, ClientsSerializer, FavoritesSerializer, LoginAttemptsSerializer, PreferencesSerializer, RatingsSerializer, RestaurantsSerializer 
+from .models import *
 
 
 def get_restaurants(request):
@@ -84,3 +87,33 @@ def get_restaurants(request):
     serialized_data = RestaurantSerializer(
         detailed_restaurants, many=True).data
     return JsonResponse(serialized_data, safe=False)
+
+
+class ClientsListView(generics.ListAPIView):
+    queryset = Clients.objects.all()
+    serializer_class = ClientsSerializer
+
+
+class FavoritesListView(generics.ListAPIView):
+    queryset = Favorites.objects.all()
+    serializer_class = FavoritesSerializer
+
+
+class LoginAttemptsListView(generics.ListAPIView):
+    queryset = LoginAttempts.objects.all()
+    serializer_class = LoginAttemptsSerializer
+
+
+class PreferencesListView(generics.ListAPIView):
+    queryset = Preferences.objects.all()
+    serializer_class = PreferencesSerializer
+
+
+class RatingsListView(generics.ListAPIView):
+    queryset = Ratings.objects.all()
+    serializer_class = RatingsSerializer
+
+
+class RestaurantsListView(generics.ListAPIView):
+    queryset = Restaurants.objects.all()
+    serializer_class = RestaurantsSerializer

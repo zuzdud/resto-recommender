@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import *
+
+from .models import Restaurants, Clients, Favorites, LoginAttempts, Preferences, Ratings
+
 
 class RestaurantSerializer(serializers.Serializer):
     id = serializers.CharField(source="place_id")
@@ -15,10 +17,12 @@ class RestaurantSerializer(serializers.Serializer):
     opening_hours = serializers.ListField(
         child=serializers.CharField(), required=False)  # Opening hours
 
+
 class ClientsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clients
         fields = '__all__'
+
 
 class FavoritesSerializer(serializers.ModelSerializer):
     class Meta:
