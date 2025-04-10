@@ -1,7 +1,7 @@
 import styles from './Homepage.module.css'
-import Button from "../Buttons/Button.jsx";
-import Sidebar from "../Sidebar/Sidebar.jsx";
-import Navigation from "../Navigation/Navigation.jsx";
+
+import Sidebar from "../../Components/Sidebar/Sidebar.jsx";
+import Navigation from "../../Components/Navigation/Navigation.jsx";
 
 function homepage() {
     return(

@@ -81,6 +81,8 @@ main.content {
     background-color: #d2bfbf;
     padding: 2rem;
     min-height: calc(100vh - 160px); /* minus navbar + footer */
+
+
 }
 
 .content h1 {
@@ -101,7 +103,7 @@ main.content {
     background-color: #e15555;
     height: 100px;
     width: 100%;
-    margin-left: 120px; /* żeby nie zachodziło na sidebar */
+    margin-left: 100px; /* żeby nie zachodziło na sidebar */
     display: flex;
     justify-content: center;
     align-items: center;

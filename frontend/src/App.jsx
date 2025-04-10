@@ -12,7 +12,7 @@ import Card from './Components/Card/Card.jsx'
 //props
 import Student from './Components/Student.jsx'
 import UserGreeting from "./Components/UserGreeting.jsx";
-import Homepage from "./Components/Homepage/Homepage.jsx";
+import Homepage from "./pages/Homepage/Homepage.jsx";
 
 function App() {
 
