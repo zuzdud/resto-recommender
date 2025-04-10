@@ -1,0 +1,25 @@
+/* Sidebar.css */
+.sidebar {
+    background-color: #a87c7c;
+    display: flex;
+    flex-direction: column; /* Zmiana z row na column */
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.profile-icon {
+    font-size: 2rem;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.side-btn {
+    background-color: #c05757;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: center; /* Zmieniłem z justify na center dla lepszego wyglądu przycisków */
+}

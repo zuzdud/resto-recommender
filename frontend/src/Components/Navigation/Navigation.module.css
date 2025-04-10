@@ -1,0 +1,6 @@
+.navigation {
+    display: flex;
+    gap: 2rem;
+    list-style-type: none;
+    color: #a94c4c;
+}

@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo-pill {
+    background-color: #e6b9b9;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.navbar {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #600;
+    padding: 10px;
+    font-weight: bold;
+
+}
+
+.navbar ul {
+    list-style-type: none;
+    background-color: #e6b9b9;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+    padding: 10px;
+}
+

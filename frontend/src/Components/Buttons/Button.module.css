@@ -1,0 +1,24 @@
+button {
+    border-radius: 15px;
+    color: #ffffff;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: "Lobster", sans-serif;
+    background-color: #A81E0B;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin: 2.5px;
+    width: 100px;
+    height: auto;
+    align-items: center;
+    align-content: center;
+}
+button:hover {
+    border-color: #ffffff;
+}
+button:focus,
+button:focus-visible {
+    outline: 2px auto -webkit-focus-ring-color;
+}
