@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 #main-class {
     width: 80%;
     margin: auto;
@@ -15,6 +7,7 @@
     background-color: #eaeaea;
 }
 
+
 .tab-pane{
     padding: 5%;
 }
@@ -22,9 +15,14 @@
 .tab-content {
     width: 300px;
     margin: auto;
-
     justify-self: center;
-    background-color: #eaeaea;
+    background-color: #eb8a8a;
+    color: white;
+    border-radius: 20px;
+}
+
+.tab-content input {
+    border-radius: 20px;
 }
 
 #pills-tab{
@@ -34,17 +32,19 @@
     /*
     //background-color: #eaeaea;
     */
-
 }
 
 #pills-tab .nav-item{
     width: 100px;
+
 
     /*// background-color: #6ade95;
     //  border-style: solid;*/
 }
 
 #pills-tab .nav-item button{
+    border-radius: 20px;
+
     /*
     // background-color: #dea954;
     */
@@ -57,16 +57,26 @@
 .nav-pills .nav-link{
     background-color: #eaeaea;
     width: 100px;
+    color: #a94c4c;
+}
+.nav-pills .nav-link:hover{
+    color: #a94c4c;
+
+    /* Higlight */
+    border: 1px solid #fff;
+
 }
 
 .nav-pills .nav-link.active{
-    --bs-nav-pills-link-active-bg: #72aaff;
+    color: white;
+    --bs-nav-pills-link-active-bg: #a94c4c;
     --bs-nav-pills-border-radius: var(--bs-border-radius);
 }
 
 #but1, #but2{
     border-style: unset;
-    background-color: #72aaff;
+    background-color: #a94c4c;
+    border-radius: 20px;
 }
 
 /*#m-cont {width: 50%}*/
@@ -80,6 +90,13 @@
 
 .screen{
     height: 10vh;
+
+}
+
+.sign-in-form {
+    background-color: #00eadf;
+    width: 90%;
+
 }
 
 

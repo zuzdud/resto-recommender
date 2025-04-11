@@ -29,7 +29,7 @@ export function Signpage() {
     };
 
     return (
-        <div>
+        <div className="sign-in-form">
             <div className="screen border-bottom"></div>
             <div className="container mt-3 mb-3" id="m-cont">
                 <ul className="nav nav-pills" id="pills-tab" role="tablist">

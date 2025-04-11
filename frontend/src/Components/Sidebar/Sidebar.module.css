@@ -1,6 +1,7 @@
 /* Sidebar.css */
 .sidebar {
     margin-right: 40px;
+    width: 200px;
 }
 
 .sidebar img {
