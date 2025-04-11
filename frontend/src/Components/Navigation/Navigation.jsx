@@ -1,9 +1,11 @@
 import styles from './Navigation.module.css';
+import Searchbar from "./SearchBar/Searchbar.jsx";
 
 function Navigation() {
     return (
-        <div>
+        <div className={styles.topnav} >
             <ul className={styles.navigation}>
+                <li><Searchbar/></li>
                 <li>Home</li>
                 <li>About</li>
                 <li>Services</li>

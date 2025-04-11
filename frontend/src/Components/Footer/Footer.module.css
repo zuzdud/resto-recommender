@@ -1,0 +1,12 @@
+/* ==== FOOTER ==== */
+.foot {
+    background-color: #e15555;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-family: "Tilt Neon", sans-serif;
+}

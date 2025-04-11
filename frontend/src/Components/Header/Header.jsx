@@ -18,22 +18,3 @@ function Header() {
 }
 
 export default Header;
-
-
-/*
-import './Header.module.css'
-
-function Header() {
-    return (
-        <header className="header">
-            <div className="logo-pill"></div>
-            <nav className="nav-links">
-                <a>HOME</a>
-                <a>ABOUT</a>
-                <a>CONTACT</a>
-            </nav>
-        </header>
-    );
-}
-export default Header;
-*/

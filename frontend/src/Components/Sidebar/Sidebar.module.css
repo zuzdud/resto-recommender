@@ -1,25 +1,45 @@
 /* Sidebar.css */
 .sidebar {
-    background-color: #a87c7c;
-    display: flex;
-    flex-direction: column; /* Zmiana z row na column */
-    padding: 1rem;
-    gap: 1rem;
+    margin-right: 40px;
 }
 
-.profile-icon {
-    font-size: 2rem;
-    background-color: #fff;
+.sidebar img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
     border-radius: 50%;
-    padding: 0.5rem;
+    background-color: #fff;
+    display: block;
+    margin: 10px auto;
+
+    border: 2px solid #fff;
+    box-shadow: white 1px 1px 10px;
 }
 
-.side-btn {
-    background-color: #c05757;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 0.5rem 1rem;
-    width: 100%;
-    text-align: center; /* Zmieniłem z justify na center dla lepszego wyglądu przycisków */
+.sidebar button {
+    border-radius: 15px;
+    color: #ffffff;
+    border: 1px solid transparent;
+    padding: 10px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: "Lobster", sans-serif;
+    background-color: #9E454A;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin: 3px;
+    width: 100px;
+    height: auto;
+
 }
+.sidebar button:hover {
+    border-color: #ffffff;
+    box-shadow: white 1px 1px 10px;
+    border: 1px solid #fff;
+}
+
+.sidebar button:focus,
+.sidebar button:focus-visible {
+    outline: 2px auto -webkit-focus-ring-color;
+}
+

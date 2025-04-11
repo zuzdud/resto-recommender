@@ -2,6 +2,7 @@ import styles from './Homepage.module.css'
 
 import Sidebar from "../../Components/Sidebar/Sidebar.jsx";
 import Navigation from "../../Components/Navigation/Navigation.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
 
 function homepage() {
     return(
@@ -9,22 +10,33 @@ function homepage() {
 
             <div className={styles.first}>
                 <div className={styles.sidebar}><Sidebar/></div>
+                <div className={styles.checkeredPattern}></div>
             </div>
 
-            <div className={styles.navbar}> <Navigation/> </div>
+            <div className={styles.navbar}><Navigation/> </div>
 
             <div className={styles.second}>
-                <div className={styles.content}> Content
-                    <h1>
-                        what's <br/>
-                        <span className={styles.highlight}>for</span><br/>
-                        dinner?
-                    </h1>
+                <div className={styles.content}>
+                    <div className={styles.pages}>
+                        <h1>
+                            What's <br/>
+                            <span className={styles.highlight}> for</span><br/>
+                            Dinner?
+                        </h1>
+                    </div>
+                    <div className={styles.checkeredPattern}></div>
+                    <div className={styles.pages}>
+                        <h1>
+                            What do you want to eat?
+                        </h1>
+                    </div>
+                    <div className={styles.checkeredPattern}></div>
+
                 </div>
 
             </div>
 
-            <div className={styles.footer}> Footer</div>
+            <div><Footer/></div>
 
         </div>
     );

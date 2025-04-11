@@ -1,7 +1,8 @@
+import styles from './Footer.module.css'
 
 function Footer(){
     return(
-        <footer>
+        <footer className={styles.foot}>
             <p>&copy;{new Date().getFullYear()} Whats For Dinner</p>
         </footer>
     );
