@@ -83,3 +83,38 @@
     border: none;
     cursor: pointer;
 }
+
+.toggle-btn {
+    background-color: #f3c221;
+    border: 1px solid #f8cb28;
+    border-radius: 5px;
+    width: 50px;
+    height: 28px;
+    transition: background-color 0.1s ease, border-color 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+.toggle-btn .thumb {
+    height: 20px;
+    width: 20px;
+    background-color: #cb1616;
+    border-radius: 99px;
+    transform: translateX(0);
+    transition: left 0.15s ease;
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.toggle-btn.toggled {
+    background-color: #151915;
+}
+.toggle-btn:hover {
+    border-color: #94ef1e;
+}
+
+.toggle-btn.toggled .thumb {
+    left: calc(50px - 20px);
+}
