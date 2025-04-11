@@ -13,6 +13,8 @@ import Card from './Components/Card/Card.jsx'
 import Student from './Components/Student.jsx'
 import UserGreeting from "./Components/UserGreeting.jsx";
 import Homepage from "./pages/Homepage/Homepage.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Signpage} from "./pages/Login/Signpage.jsx";
 
 function App() {
 
@@ -29,7 +31,16 @@ function App() {
     );
 */
     return(
-        <Homepage/>
+
+        //<Homepage/>
+
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Homepage/>} />
+                <Route path="/login" element={<Signpage/>} />
+                {/*<Route path="/register" element={<Register />} />*/}
+            </Routes>
+        </BrowserRouter>
     );
 
 }
