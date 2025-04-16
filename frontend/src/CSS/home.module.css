@@ -128,15 +128,10 @@ html, body, #root {
 /* Logo główne */
 .logo {
     grid-area: logo;
-    display: grid;
     place-items: center;
-    grid-template-columns: 5.4fr;
-    grid-template-rows: 0.5fr 4fr;
     grid-template-areas:
     "searchbar-space"
     "logo-picture";
-
-    height: 80vh;
 }
 
 /* Boczne elementy dekoracyjne (SZACHOWNICE) */
