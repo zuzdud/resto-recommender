@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from '../CSS/home.module.css'
 import '../index.css'
 import Searchbar from "./Components/Navigation/SearchBar/Searchbar.jsx";
+import logo from '../assets/logo5.jpg';
 
 export default function Home() {
     const [darkMode, setDarkMode] = useState(false);
@@ -102,7 +103,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={styles.logo}>
-                <Searchbar/>
+                <img className={styles["logo-picture"]} src={logo} />
             </div>
             <div className={styles.right}></div>
             <div className={styles.left}></div>

@@ -1,9 +1,11 @@
-/* Reset */
+/* ===========================================
+   PODSTAWOWE USTAWIENIA I RESET
+   =========================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #486550;
+    color: #662222;
 }
 
 html, body, #root {
@@ -11,6 +13,9 @@ html, body, #root {
     height: 100%;
 }
 
+/* ===========================================
+   UKŁAD STRONY - GŁOWNY KONTENER
+   =========================================== */
 .container {
     display: grid;
     grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr;
@@ -24,9 +29,11 @@ html, body, #root {
     background-color: #F9FAF5;
 }
 
+/* ===========================================
+   NAWIGACJA
+   =========================================== */
 .navigation {
     grid-area: navigation;
-    background-color: #F9FAF5;
     color: black;
     height: 70px;
     margin-bottom: 10px;
@@ -41,57 +48,27 @@ html, body, #root {
     "minilogo menu-bttn login-bttn";
 }
 
-.logo {
-    grid-area: logo;
-    background-color: rgba(255, 255, 255, 0.94);
-    margin-bottom: 20px;
-    margin-top: 0;
-    height: 80vh;
-    background-image: url('../assets/logo.jpg');
-}
-
-.footer {
-    grid-area: footer;
-    background-color: #486550;
-    height: 100%;
-    text-align: center;
-    color: white;
-    padding-top: 20px;
-}
-
-.left, .right {
-    grid-area: left; /* dla odpowiedniego elementu */
-    width: 50px;
-    height: 80vh;
-
-    background-image: linear-gradient(45deg, #486550 25%, transparent 25%), linear-gradient(-45deg, #486550 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #486550 75%), linear-gradient(-45deg, transparent 75%, #486550 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-
-/* Oddzielnie trzeba ustawić grid-area dla .right */
-.right {
-    grid-area: right;
-    margin-left: 35px;
-}
-
+/* Mini logo w nawigacji */
 .minilogo {
     grid-area: minilogo;
     text-align: left;
     padding-left: 20px;
 }
 
+/* Przyciski menu */
 .menu-bttn {
     grid-area: menu-bttn;
     text-align: center;
     margin-right: 70px;
 }
+
 .menu-bttn ul {
     list-style-type: none;
     display: flex;
     gap: 40px;
     text-align: right;
 }
+
 .menu-bttn button {
     border: none;
     background: transparent;
@@ -100,6 +77,7 @@ html, body, #root {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
 .menu-bttn button:hover {
     background-color: #fbefef;
     border-radius: 20px;
@@ -110,7 +88,7 @@ html, body, #root {
     box-shadow: 0 0 10px rgb(251, 239, 239);
 }
 
-/*  Login bttn (logowanie + tryb strony(ciemny/jasny)) */
+/* Przycisk logowania */
 .login-bttn {
     grid-area: login-bttn;
     text-align: right;
@@ -126,6 +104,7 @@ html, body, #root {
     padding-top: 5px;
     padding-bottom: 8px;
 }
+
 .login-bttn button:hover {
     background-color: #353535;
     border-radius: 20px;
@@ -143,18 +122,67 @@ html, body, #root {
     align-items: end;
 }
 
-/* TOGGLE bttn - dark/day mode */
+/* ===========================================
+   GŁÓWNE ELEMENTY TREŚCI
+   =========================================== */
+/* Logo główne */
+.logo {
+    grid-area: logo;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 5.4fr;
+    grid-template-rows: 0.5fr 4fr;
+    grid-template-areas:
+    "searchbar-space"
+    "logo-picture";
+
+    height: 80vh;
+}
+
+/* Boczne elementy dekoracyjne (SZACHOWNICE) */
+.left, .right {
+    grid-area: left;
+    width: 50px;
+    height: 80vh;
+
+    background-image: linear-gradient(45deg, #662222 25%, transparent 25%),
+    linear-gradient(-45deg, #662222 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #662222 75%),
+    linear-gradient(-45deg, transparent 75%, #662222 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.right {
+    grid-area: right;
+    margin-left: 35px;
+}
+.logo-picture {
+    grid-area: logo-picture;
+    background-color: rgba(255, 255, 255, 0.94);
+    height: 70vh;
+    padding-left: 50vh;
+    padding-right: 50vh;
+    border: black solid 1px;
+    /* background-image: url('../assets/logo5.jpg');*/
+}
+
+/* ===========================================
+   PRZEŁĄCZNIK TRYBU CIEMNEGO/JASNEGO
+   =========================================== */
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
+
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -163,9 +191,9 @@ html, body, #root {
     right: 0;
     bottom: 0;
     background-color: #000000;
-    -webkit-transition: .4s;
     transition: .4s;
 }
+
 .slider:before {
     position: absolute;
     content: "";
@@ -174,35 +202,42 @@ html, body, #root {
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
     transition: .4s;
 }
+
 input:checked + .slider {
     background-color: #bfea1c;
 }
+
 input:focus + .slider {
     box-shadow: 0 0 1px #bfea1c;
 }
+
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-/* Rounded sliders */
+
+/* Zaokrąglone przełączniki */
 .slider.round {
     border-radius: 34px;
 }
+
 .slider.round:before {
     border-radius: 50%;
 }
 
-/*FOOTER*/
+/* ===========================================
+   STOPKA
+   =========================================== */
 .footer {
+    grid-area: footer;
     width: 100%;
-    background-color: #486550;
+    background-color: #662222;
     color: #fff;
     padding: 0 10px;
     padding-top: 20px;
+    height: 100%;
+    text-align: center;
 }
 
 .footerContent {
@@ -263,17 +298,10 @@ input:checked + .slider:before {
     font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
-    .footerContent {
-        flex-direction: column;
-    }
-
-    .footerSection {
-        margin-bottom: 30px;
-    }
-}
-
-/* Style dla trybu ciemnego */
+/* ===========================================
+   TRYB CIEMNY
+   =========================================== */
+/* Główny kontener w trybie ciemnym */
 .darkContainer {
     background-color: #1B2B34;
     color: #80DEEA;
@@ -288,7 +316,6 @@ input:checked + .slider:before {
 }
 
 .darkContainer .navigation {
-    background-color: #1a1e21;
 }
 
 .darkContainer .footer {
@@ -296,14 +323,13 @@ input:checked + .slider:before {
 }
 
 .darkContainer .menu-bttn button {
-    padding: 10px;
+
 }
 
 .darkContainer .menu-bttn button:hover {
     background-color: #e1e1e1;
     box-shadow: 0 0 10px rgb(255, 253, 253);
     color: black;
-    padding: 10px;
 }
 
 .darkContainer .login-bttn button:hover {
@@ -312,7 +338,7 @@ input:checked + .slider:before {
     color: black;
 }
 
-/* Można również dodać style dla globalnych elementów w trybie ciemnym */
+/* Globalny styl dla trybu ciemnego */
 body.dark-mode {
     background-color: #1B2B34;
     color: #80DEEA;
@@ -323,26 +349,41 @@ body.dark-mode {
     background-color: rgba(30, 35, 40, 0.94);
 }
 
+/* Efekt neonowy dla minilogo w trybie ciemnym */
 .darkContainer .minilogo h4 {
     animation: neonize 1s ease-in-out infinite alternate;
 }
+
 @keyframes neonize {
     from {
         text-shadow:
-        0 0 4px rgba(255, 255, 255, 0.94),
-        0 0 10px rgba(255, 255, 255, 0.94),
-        0 0 30px #bfea1c,
-        0 0 50px #bfea1c,
-        0 0 70px #bfea1c,
-        0 0 90px #bfea1c
+                0 0 4px rgba(255, 255, 255, 0.94),
+                0 0 10px rgba(255, 255, 255, 0.94),
+                0 0 30px #bfea1c,
+                0 0 50px #bfea1c,
+                0 0 70px #bfea1c,
+                0 0 90px #bfea1c
     }
     to {
         text-shadow:
-        0 0 2px rgba(255, 255, 255, 0.94),
-        0 0 5px rgba(255, 255, 255, 0.94),
-        0 0 15px #bfea1c,
-        0 0 25px #bfea1c,
-        0 0 35px #bfea1c,
-        0 0 45px #bfea1c
+                0 0 2px rgba(255, 255, 255, 0.94),
+                0 0 5px rgba(255, 255, 255, 0.94),
+                0 0 15px #bfea1c,
+                0 0 25px #bfea1c,
+                0 0 35px #bfea1c,
+                0 0 45px #bfea1c
+    }
+}
+
+/* ===========================================
+   RESPONSYWNOŚĆ
+   =========================================== */
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+    }
+
+    .footerSection {
+        margin-bottom: 30px;
     }
 }
