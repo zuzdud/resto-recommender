@@ -1,0 +1,274 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #486550;
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr;
+    grid-template-rows: 0.5fr 2.6fr 0.6fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    ". . navigation . ."
+    "left logo logo logo right"
+    "footer footer footer footer footer";
+
+    background-color: #F9FAF5;
+}
+
+.navigation {
+    grid-area: navigation;
+    background-color: #F9FAF5;
+    color: black;
+    height: 70px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "minilogo menu-bttn login-bttn";
+}
+
+.logo {
+    grid-area: logo;
+    background-color: rgba(255, 255, 255, 0.94);
+    margin-bottom: 20px;
+    margin-top: 0;
+    height: 80vh;
+    background-image: url('../assets/logo.jpg');
+}
+
+.footer {
+    grid-area: footer;
+    background-color: #486550;
+    height: 100%;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+}
+
+.left, .right {
+    grid-area: left; /* dla odpowiedniego elementu */
+    width: 50px;
+    height: 80vh;
+
+    background-image: linear-gradient(45deg, #486550 25%, transparent 25%), linear-gradient(-45deg, #486550 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #486550 75%), linear-gradient(-45deg, transparent 75%, #486550 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Oddzielnie trzeba ustawić grid-area dla .right */
+.right {
+    grid-area: right;
+    margin-left: 35px;
+}
+
+.minilogo {
+    grid-area: minilogo;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.menu-bttn {
+    grid-area: menu-bttn;
+    text-align: center;
+    margin-right: 70px;
+}
+.menu-bttn ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+    text-align: right;
+}
+.menu-bttn button {
+    border: none;
+    background: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.menu-bttn button:hover {
+    background-color: #fbefef;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0 0 10px rgb(251, 239, 239);
+}
+
+/*  Login bttn (logowanie + tryb strony(ciemny/jasny)) */
+.login-bttn {
+    grid-area: login-bttn;
+    text-align: right;
+}
+
+.login-bttn button {
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+}
+.login-bttn button:hover {
+    background-color: #353535;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    box-shadow: 0 0 10px rgb(251, 239, 239);
+}
+
+.login-bttn ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+    align-items: end;
+}
+
+/* TOGGLE bttn - dark/day mode */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/*FOOTER*/
+.footer {
+    width: 100%;
+    background-color: #486550;
+    color: #fff;
+    padding: 0 10px;
+    padding-top: 20px;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footerSection {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footerSection h3, .footerSection h4 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footerSection p {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.footerSection ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerSection ul li {
+    margin-bottom: 8px;
+}
+
+.footerSection ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footerSection ul li a:hover {
+    color: #bfea1c;
+}
+
+.footerBottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+}
+
+.footerBottom p {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+    }
+
+    .footerSection {
+        margin-bottom: 30px;
+    }
+}

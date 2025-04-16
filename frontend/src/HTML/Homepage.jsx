@@ -1,7 +1,7 @@
-import styles from './Homepage.module.css'
-import Sidebar from "../../Components/Sidebar/Sidebar.jsx";
-import Navigation from "../../Components/Navigation/Navigation.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
+import styles from '../CSS/Homepage.module.css'
+import Sidebar from "./Components/Sidebar/Sidebar.jsx";
+import Navigation from "./Components/Navigation/Navigation.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 import {useState} from "react";
 
 function homepage() {

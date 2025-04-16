@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from 'react';
-import styles from './Sidebar.module.css';
-import picture from '../../assets/images.jpg'
+import styles from '../../../CSS/Sidebar.module.css';
+import picture from '../../../assets/images.jpg'
 
 export default function Sidebar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);

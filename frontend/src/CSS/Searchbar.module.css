@@ -1,0 +1,37 @@
+/* SEARCHBAR */
+.searchContainer {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+/* Wpisywany tekst */
+.searchContainer input[type=text] {
+    background-color: #486550;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    font-family: "Lobster", sans-serif;
+    align-items: center;
+    width: 100%;
+}
+
+/* Defaultowy */
+.searchContainer input::placeholder{
+    color: white;
+    font-family: "Lobster", sans-serif;
+
+}
+
+.searchContainer input:focus {
+    border: none;
+}
+
+.searchContainer input:active{
+    border: none;
+}
+.input:focus {
+    outline: none; /* Usuwa domyślny outline przeglądarki */
+    border-color: transparent; /* Opcjonalnie możesz też ukryć początkowy border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Delikatny cień zamiast bordera */
+}

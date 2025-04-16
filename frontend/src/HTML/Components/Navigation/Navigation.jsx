@@ -1,4 +1,4 @@
-import styles from './Navigation.module.css';
+import styles from '../../../CSS/Navigation.module.css';
 import Searchbar from "./SearchBar/Searchbar.jsx";
 import {useState} from "react";
 

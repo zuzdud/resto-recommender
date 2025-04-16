@@ -1,5 +1,5 @@
 import {useState} from "react";
-import "./sign.css"
+import "../CSS/sign.css"
 /*
 
 npm install react-router-dom

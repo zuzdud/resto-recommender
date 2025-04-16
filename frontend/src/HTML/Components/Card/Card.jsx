@@ -1,4 +1,4 @@
-import picture from '../../assets/images.jpg'
+import picture from '../../../assets/images.jpg'
 import styles from './Card.module.css'
 
 function Card(){

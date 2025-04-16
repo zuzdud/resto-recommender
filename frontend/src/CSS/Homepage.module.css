@@ -2,7 +2,8 @@
     box-sizing: border-box;
 }
 
-body {
+/*
+.body {
     margin: 0;
     font-family: sans-serif;
     background-color: #ffffff;
@@ -10,7 +11,9 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding-left: 110px; /* przestrzeń na sidebar */
+/*
 }
+
 
 /* Dzięki temu .content wypełni przestrzeń */
 main.content {
