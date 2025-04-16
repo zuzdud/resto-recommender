@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react';
-import styles from '../../../CSS/Sidebar.module.css';
+import styles from '../../../CSS/Components/Sidebar.module.css';
 import picture from '../../../assets/images.jpg'
 
 export default function Sidebar() {

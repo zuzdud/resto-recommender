@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../CSS/MainContent.module.css';
+import '../../../CSS/Components/MainContent.module.css';
 
 export default function MainContent() {
     return (
