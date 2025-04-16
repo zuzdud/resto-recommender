@@ -1,10 +1,24 @@
+/* ===========================================
+   PODSTAWOWE USTAWIENIA I RESET
+   =========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #662222;
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+}
 /* Main Container Styling */
 #main-class {
     width: 80%;
     margin: auto;
     height: 250px;
     justify-self: center;
-    background-color: #eaeaea;
+    background-color: #F9FAF5;
 }
 
 /* Tab Content Container Styling */
@@ -55,7 +69,7 @@
     color: #a94c4c;
     padding: 5px;
     /* Highlight effect */
-    box-shadow: 0px 0px 10px #ffffff;
+    box-shadow: 0px 0px 10px #662222;
 }
 
 /* Navigation Links - Active State */
@@ -78,8 +92,32 @@
 }
 
 /* Sign-in Form Styling */
-.sign-in-form {
+.sign-form {
     background-color: #662222;
     width: 100%;
     height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 0.5fr 3fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "navigation navigation navigation"
+    ". sign-form ."
+    "footer footer footer";
 }
+.footer {
+    grid-area: footer;
+    background-color: #00eadf;
+}
+.Navigation { grid-area: navigation; }
+.sign-form {
+    grid-area: sign-form;
+    place-items: center;
+
+}
+
+.sign-in-form  {
+    background-color: #F9FAF5;
+}
+

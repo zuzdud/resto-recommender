@@ -19,7 +19,7 @@ html, body, #root {
 .container {
     display: grid;
     grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr;
-    grid-template-rows: 0.5fr 2.6fr 0.6fr;
+    grid-template-rows: 0.3fr 2.2fr 0.3fr;
     gap: 0px 0px;
     grid-template-areas:
     ". . navigation . ."
@@ -54,6 +54,9 @@ html, body, #root {
     text-align: left;
     padding-left: 20px;
 }
+.minilogo h4 {
+    text-shadow: 0 0 10px #eb8a8a;
+}
 
 /* Przyciski menu */
 .menu-bttn {
@@ -65,8 +68,9 @@ html, body, #root {
 .menu-bttn ul {
     list-style-type: none;
     display: flex;
-    gap: 40px;
+    gap: 15px;
     text-align: right;
+    margin-left: 70px;
 }
 
 .menu-bttn button {
@@ -79,20 +83,23 @@ html, body, #root {
 }
 
 .menu-bttn button:hover {
-    background-color: #fbefef;
+    background-color: #eda1a1;
     border-radius: 20px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    box-shadow: 0 0 10px rgb(251, 239, 239);
+    box-shadow: 0 0 10px #662222;
+    color: #662222;
 }
 
 /* Przycisk logowania */
 .login-bttn {
     grid-area: login-bttn;
     text-align: right;
+    gap: 10px;
 }
+
 
 .login-bttn button {
     border: none;
@@ -112,15 +119,19 @@ html, body, #root {
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 8px;
-    box-shadow: 0 0 10px rgb(251, 239, 239);
+    box-shadow: 0 0 15px rgb(255, 255, 255);
 }
 
 .login-bttn ul {
     list-style-type: none;
     display: flex;
-    gap: 40px;
+    gap: 15px;
     align-items: end;
+    margin-left: 70px;
 }
+
+
+
 
 /* ===========================================
    GŁÓWNE ELEMENTY TREŚCI
@@ -135,7 +146,7 @@ html, body, #root {
 }
 
 /* Boczne elementy dekoracyjne (SZACHOWNICE) */
-.left, .right {
+.container .left, .right {
     grid-area: left;
     width: 50px;
     height: 80vh;
@@ -148,16 +159,17 @@ html, body, #root {
     background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
 
-.right {
+.container .right {
     grid-area: right;
     margin-left: 35px;
 }
 .logo-picture {
     grid-area: logo-picture;
     background-color: rgba(255, 255, 255, 0.94);
-    height: 70vh;
+    height: 80vh;
+    margin-left: 10vh;
     padding-left: 50vh;
-    padding-right: 50vh;
+    padding-right: 40vh;
     border: black solid 1px;
     /* background-image: url('../assets/logo5.jpg');*/
 }
@@ -201,11 +213,11 @@ html, body, #root {
 }
 
 input:checked + .slider {
-    background-color: #bfea1c;
+    background-color: #71cbb5;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #bfea1c;
+    box-shadow: 0 0 1px #71cbb5;
 }
 
 input:checked + .slider:before {
@@ -233,6 +245,7 @@ input:checked + .slider:before {
     padding-top: 20px;
     height: 100%;
     text-align: center;
+    margin-top:0;
 }
 
 .footerContent {
@@ -278,7 +291,7 @@ input:checked + .slider:before {
 }
 
 .footerSection ul li a:hover {
-    color: #bfea1c;
+    color: #eda1a1;
 }
 
 .footerBottom {
@@ -322,15 +335,17 @@ input:checked + .slider:before {
 }
 
 .darkContainer .menu-bttn button:hover {
-    background-color: #e1e1e1;
+    background-color: #000000;
     box-shadow: 0 0 10px rgb(255, 253, 253);
-    color: black;
+    color: white;
+    animation: neonize2 1s ease-in-out infinite alternate;
 }
 
 .darkContainer .login-bttn button:hover {
-    background-color: #e1e1e1;
+    background-color: #000000;
     box-shadow: 0 0 10px rgb(255, 253, 253);
-    color: black;
+    color: white;
+    animation: neonize2 1s ease-in-out infinite alternate;
 }
 
 /* Globalny styl dla trybu ciemnego */
@@ -354,19 +369,59 @@ body.dark-mode {
         text-shadow:
                 0 0 4px rgba(255, 255, 255, 0.94),
                 0 0 10px rgba(255, 255, 255, 0.94),
-                0 0 30px #bfea1c,
-                0 0 50px #bfea1c,
-                0 0 70px #bfea1c,
-                0 0 90px #bfea1c
+                0 0 30px #71cbb5,
+                0 0 50px #71cbb5,
+                0 0 70px #71cbb5,
+                0 0 90px #71cbb5
     }
     to {
         text-shadow:
                 0 0 2px rgba(255, 255, 255, 0.94),
                 0 0 5px rgba(255, 255, 255, 0.94),
-                0 0 15px #bfea1c,
-                0 0 25px #bfea1c,
-                0 0 35px #bfea1c,
-                0 0 45px #bfea1c
+                0 0 15px #662222,
+                0 0 25px #662222,
+                0 0 35px #662222,
+                0 0 45px #662222
+    }
+}
+@keyframes neonize3 {
+    from {
+        text-shadow:
+                0 0 2px rgba(255, 255, 255, 0.94),
+                0 0 5px rgba(255, 255, 255, 0.94),
+                0 0 15px #662222,
+                0 0 25px #662222,
+                0 0 35px #662222,
+                0 0 40px #662222
+    }
+    to {
+        text-shadow:
+                0 0 1px rgba(255, 255, 255, 0.94),
+                0 0 2px rgba(255, 255, 255, 0.94),
+                0 0 7px #662222,
+                0 0 12px #662222,
+                0 0 15px #662222,
+                0 0 22px #662222
+    }
+}
+@keyframes neonize2 {
+    from {
+        text-shadow:
+                0 0 4px rgba(255, 255, 255, 0.94),
+                0 0 10px rgba(255, 255, 255, 0.94),
+                0 0 30px #eb8a8a,
+                0 0 50px #eb8a8a,
+                0 0 70px #eb8a8a,
+                0 0 90px #eb8a8a
+    }
+    to {
+        text-shadow:
+                0 0 2px rgba(255, 255, 255, 0.94),
+                0 0 5px rgba(255, 255, 255, 0.94),
+                0 0 15px #eb8a8a,
+                0 0 25px #eb8a8a,
+                0 0 35px #eb8a8a,
+                0 0 45px #eb8a8a
     }
 }
 
@@ -381,4 +436,21 @@ body.dark-mode {
     .footerSection {
         margin-bottom: 30px;
     }
+}
+
+.darkContainer .left, .darkContainer .right {
+    grid-area: left;
+    width: 50px;
+    height: 80vh;
+
+    background-image: linear-gradient(45deg, #eb8a8a 25%, transparent 25%),
+    linear-gradient(-45deg, #eb8a8a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #eb8a8a 75%),
+    linear-gradient(-45deg, transparent 75%, #eb8a8a 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+.darkContainer .right {
+    grid-area: right;
+    margin-left: 35px;
 }
