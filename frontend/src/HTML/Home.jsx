@@ -1,11 +1,41 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../CSS/home.module.css'
 import '../index.css'
 import Searchbar from "./Components/Navigation/SearchBar/Searchbar.jsx";
 
 export default function Home() {
+    const [darkMode, setDarkMode] = useState(false);
+
+    // Efekt uruchamiany przy zmianie trybu
+    useEffect(() => {
+        // Dodaj lub usuń klasę dark-mode z elementu body
+        if (darkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+
+        // Opcjonalnie: zapisz preferencję użytkownika w localStorage
+        localStorage.setItem('darkMode', darkMode);
+    }, [darkMode]);
+
+    // Załaduj preferencję użytkownika przy starcie
+    useEffect(() => {
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode !== null) {
+            setDarkMode(savedMode === 'true');
+        }
+    }, []);
+
+    // Funkcja do przełączania trybu
+    const toggleDarkMode = () => {
+        setDarkMode(prevMode => !prevMode);
+    };
+
     return (
-        <div className={styles.container}>
+        // Dodajemy klasę darkContainer warunkowo gdy darkMode jest true
+        <div className={`${styles.container} ${darkMode ? styles.darkContainer : ''}`}>
             <div className={styles.footer}>
                 <div className={styles.footerContent}>
                     <div className={styles.footerSection}>
@@ -58,7 +88,10 @@ export default function Home() {
                     <ul>
                         <li>
                             <label className={styles.switch}>
-                                <input type="checkbox"/>
+                                <input type="checkbox"
+                                       checked={darkMode}
+                                       onChange={toggleDarkMode}
+                                />
                                 <span className={`${styles.slider} ${styles.round}`}></span>
                             </label>
                         </li>
