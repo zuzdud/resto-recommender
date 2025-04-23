@@ -15,7 +15,9 @@ import Student from './HTML/Components/Student.jsx'
 import UserGreeting from "./HTML/Components/UserGreeting.jsx";
 import Homepage from './HTML/Homepage.jsx'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Signpage} from "./HTML/Signpage.jsx";
+import {Signpage} from "./HTML/Sign/Signpage.jsx";
+import Layout from "./HTML/Layout.jsx";
+import {Form} from "./HTML/Components/Form/Form.jsx";
 
 function App() {
 
@@ -35,12 +37,21 @@ function App() {
 
         //<Homepage/>
 
-        <BrowserRouter>
+        /*<BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage/>} />
                 <Route path="/home" element={<Home/>} />
                 <Route path="/login" element={<Signpage/>} />
-                {/*<Route path="/register" element={<Register />} />*/}
+                {/!*<Route path="/register" element={<Register />} />*!/}
+            </Routes>
+        </BrowserRouter>*/
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}>
+                    <Route index element={<Home/>} />
+                    <Route path="login" element={<Signpage/>} />
+                    <Route path="register" element={<Form/>} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

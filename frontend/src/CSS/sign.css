@@ -1,22 +1,20 @@
 
-#main-class {
-    width: 80%;
-    margin: auto;
-    height: 250px;
-    justify-self: center;
-    background-color: #eaeaea;
-}
 
+
+.form-label{
+    font-family: "Lobster", sans-serif;
+    color: #eaeaea;
+}
 
 .tab-pane{
     padding: 5%;
 }
 
 .tab-content {
-    width: 300px;
+    width: 450px;
     margin: auto;
     justify-self: center;
-    background-color: #eb8a8a;
+    background-color: #486550;
     color: white;
     border-radius: 20px;
 }
@@ -57,26 +55,29 @@
 .nav-pills .nav-link{
     background-color: #eaeaea;
     width: 100px;
-    color: #a94c4c;
+    /*color: #c13584;*/
+    color: #486550;
 }
 .nav-pills .nav-link:hover{
-    color: #a94c4c;
-
+    color: #eaeaea;
+    background-color: #87978B;
     /* Higlight */
-    border: 1px solid #fff;
+    /*border: 1px solid #fff;*/
 
 }
 
 .nav-pills .nav-link.active{
     color: white;
-    --bs-nav-pills-link-active-bg: #a94c4c;
+    --bs-nav-pills-link-active-bg: #486550;
     --bs-nav-pills-border-radius: var(--bs-border-radius);
 }
 
-#but1, #but2{
+#but1, #but2, #but{
     border-style: unset;
-    background-color: #a94c4c;
+    text-align: center;
+    background-color: #eaeaea;
     border-radius: 20px;
+    color: #486550;
 }
 
 /*#m-cont {width: 50%}*/
@@ -90,12 +91,11 @@
 
 .screen{
     height: 10vh;
-
 }
 
 .sign-in-form {
     background-color: #00eadf;
-    width: 90%;
+    width: 100%;
 
 }
 

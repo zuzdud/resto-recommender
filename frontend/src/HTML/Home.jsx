@@ -2,14 +2,19 @@ import React from 'react';
 import styles from '../CSS/home.module.css'
 import '../index.css'
 import Searchbar from "./Components/Navigation/SearchBar/Searchbar.jsx";
+import {Link} from "react-router-dom";
 
-export default function Home() {
+/*export default function Home() {*/
+const Home = () => {
+
     return (
         <div className={styles.container}>
             <div className={styles.footer}>
                 <div className={styles.footerContent}>
                     <div className={styles.footerSection}>
-                        <h3>What's for dinner</h3>
+
+                            <h3>What's for dinner</h3>
+
                         <p>Your new favorite restaurants at your fingertips</p>
                     </div>
 
@@ -36,7 +41,9 @@ export default function Home() {
             </div>
             <div className={styles.navigation}>
                 <div className={styles.minilogo}>
-                    <h4>What's for dinner</h4>
+                    <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                        <h4>What's for dinner</h4>
+                    </Link>
                 </div>
                 <div className={styles["menu-bttn"]}>
                     <ul>
@@ -63,7 +70,12 @@ export default function Home() {
                             </label>
                         </li>
                         <li>
-                            <button>Login</button>
+                            <Link to="/login">
+                                <button>
+                                    Sign in
+                                </button>
+                            </Link>
+
                         </li>
                     </ul>
                 </div>
@@ -75,4 +87,6 @@ export default function Home() {
             <div className={styles.left}></div>
         </div>
     );
-}
+};
+
+export default Home;
