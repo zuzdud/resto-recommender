@@ -1,7 +1,7 @@
 /* SEARCHBAR */
 .searchContainer {
-    margin-left: 300px;
-    margin-right: 300px;
+
+    width: 300px;
 }
 
 /* Wpisywany tekst */
@@ -34,4 +34,10 @@
     outline: none; /* Usuwa domyślny outline przeglądarki */
     border-color: transparent; /* Opcjonalnie możesz też ukryć początkowy border */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Delikatny cień zamiast bordera */
+}
+
+@media (max-width: 500px){
+    .searchContainer {
+        width: 200px;
+    }
 }

@@ -1,0 +1,46 @@
+/*.navbar{
+  height: 10%;
+  width: 100%;
+}*/
+
+
+.navbar{
+    background-color: rgba(249, 250, 245, 0.94);
+    width: 70%;
+    height: 40px;
+}
+
+.navbar-name{
+
+    font-weight: 500;
+    font-size: 23px;
+    height: 40px;
+    text-decoration: none;
+    color: #486550;
+}
+
+
+
+.dropdown-menu{
+    width: 100px;
+}
+
+.nav-item a:hover{
+    cursor: pointer;
+    color: rgba(255, 0, 0, 0.71);
+    /*
+    color: #c13584;
+    */
+}
+
+@media (max-width: 500px) {
+    .navbar{
+        width: 90%;
+    }
+}
+
+@media (max-width: 340px) {
+    .navbar{
+        width: 100%;
+    }
+}

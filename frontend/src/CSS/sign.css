@@ -57,6 +57,8 @@
     width: 100px;
     /*color: #c13584;*/
     color: #486550;
+    border-style: solid;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 .nav-pills .nav-link:hover{
     color: #eaeaea;
@@ -69,6 +71,7 @@
 .nav-pills .nav-link.active{
     color: white;
     --bs-nav-pills-link-active-bg: #486550;
+    box-shadow: 0 10px 30px rgba(72, 101, 80, 0.4);
     --bs-nav-pills-border-radius: var(--bs-border-radius);
 }
 
@@ -94,10 +97,19 @@
 }
 
 .sign-in-form {
-    background-color: #00eadf;
+    /*background-color: #00eadf;*/
     width: 100%;
 
 }
+
+.super-shadow{
+    /*
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    */
+    box-shadow: 0 10px 30px rgba(72, 101, 80, 0.9);
+
+}
+
 
 
 

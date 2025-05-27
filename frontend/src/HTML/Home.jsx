@@ -70,12 +70,11 @@ const Home = () => {
                             </label>
                         </li>
                         <li>
-                            <Link to="/login">
+                            <Link to="/sign">
                                 <button>
                                     Sign in
                                 </button>
                             </Link>
-
                         </li>
                     </ul>
                 </div>

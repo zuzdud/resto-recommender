@@ -58,12 +58,39 @@ export function LoginForm(){
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             console.log("Logowanie OK:", { username, password });
-        }
+            try {
+/*                const response = await fetch('http://localhost:8080/api/auth/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                });
 
+                if (!response.ok) {
+                    throw new Error('Logowanie nieudane');
+                }
+
+                const token = await response.text(); // Twój backend zwraca sam token jako String
+                console.log("Otrzymany token:", token);
+
+                // Zapisz token do localStorage
+                localStorage.setItem('token', token);*/
+
+                // Przekieruj użytkownika np. do dashboardu
+                window.location.href = "/";
+
+            } catch (error) {
+                console.error('Błąd logowania:', error.message);
+            }
+        }
     };
 
 
