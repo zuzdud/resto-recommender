@@ -1,0 +1,17 @@
+/* src/styles/globals.css */
+:root {
+    --background: #ffffff;
+    --text: #000000;
+    --primary: #3498db;
+}
+
+.dark {
+    --background: #121212;
+    --text: #ffffff;
+    --primary: #61dafb;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}

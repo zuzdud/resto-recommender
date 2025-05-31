@@ -1,0 +1,39 @@
+.container {  display: grid;
+    grid-template-columns: 0.6fr 1.9fr 0.5fr;
+    grid-template-rows: 0.1fr 2.3fr 0.4fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "Navigation Navigation Navigation"
+    ". Area ."
+    "footer footer footer";
+    height: 100vh;
+    width: 100%;
+    background-color: #F9FAF5;
+}
+
+.Footer {
+    grid-area: footer;
+}
+
+.Navigation {
+    grid-area: Navigation;
+}
+
+.Area {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+    grid-area: Area;
+    background-color: #9ac6c4;
+    min-height: 82vh;
+    margin-bottom: 40px;
+}
+
+
