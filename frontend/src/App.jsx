@@ -1,10 +1,9 @@
-import Home from './HTML/Home.jsx'
-import { ThemeProvider } from './contexts/ThemeContex.jsx';
+import Home from './pages/Home/Home.jsx'
+import Homepage from './pages/Homepage/Homepage.jsx'
+import {Signpage} from "./pages/Auth/Signup/Signpage.jsx";
+import Discover from "./pages/Discover/Discover.jsx";
 
-import Homepage from './HTML/Homepage.jsx'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Signpage} from "./HTML/Signpage.jsx";
-import Discover from "./HTML/Discover.jsx";
 
 function App() {
 

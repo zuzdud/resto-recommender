@@ -1,4 +1,4 @@
-import styles from '../../../CSS/Components/Footer.module.css'
+import styles from './Footer.module.css'
 import React from "react";
 
 function Footer(){

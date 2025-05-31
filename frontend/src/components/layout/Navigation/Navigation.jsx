@@ -1,6 +1,5 @@
-import styles from '../../../CSS/Components/Navigation.module.css';
-import Searchbar from "./SearchBar/Searchbar.jsx";
-import React, {useState} from "react";
+import styles from './Navigation.module.css';
+
 
 function Navigation() {
 

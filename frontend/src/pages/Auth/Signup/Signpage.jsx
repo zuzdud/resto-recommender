@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
-import "../CSS/sign.css"
-import styles from "../CSS/home.module.css";
+import "./Signpage.module.css"
+import styles from "../../Home/home.module.css";
 /*
 
 npm install react-router-dom
 npm install react-bootstrap bootstrap
-
 
 */
 

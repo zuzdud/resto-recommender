@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../CSS/home.module.css'
-import '../index.css'
-import Searchbar from "./Components/Navigation/SearchBar/Searchbar.jsx";
-import logo from '../assets/logo5.jpg';
+import styles from './home.module.css'
+import '../../styles/index.css'
+import Searchbar from "../../components/common/Searchbar/Searchbar.jsx";
+import logo from '../../assets/logo5.jpg';
 
 export default function Home() {
 

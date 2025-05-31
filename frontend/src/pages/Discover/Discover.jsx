@@ -1,8 +1,8 @@
-import styles from "../CSS/Discover.module.css"
+import styles from "./Discover.module.css"
+import Footer from "../../components/layout/Footer/Footer.jsx";
+import Navigation from "../../components/layout/Navigation/Navigation.jsx";
 
 import React from "react";
-import Footer from "./Components/Footer/Footer.jsx";
-import Navigation from "./Components/Navigation/Navigation.jsx";
 
 export default function Discover() {
     return (
