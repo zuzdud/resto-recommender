@@ -13,3 +13,25 @@
     box-shadow: 0 20px 30px rgba(169, 76, 76, 0.4);
 
 }
+
+.slider-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rc-slider-mark-text {
+    white-space: nowrap;
+    font-size: 0.85rem;        /* zmniejsz tekst jeśli trzeba */
+    overflow: hidden;
+    text-overflow: ellipsis;   /* opcjonalnie dodaje "…" przy przepełnieniu */
+}
+
+
+input[type="checkbox"] {
+    accent-color: #9E454A; /* np. pomarańczowy */
+
+
+}

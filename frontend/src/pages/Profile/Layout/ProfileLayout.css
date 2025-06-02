@@ -1,48 +1,6 @@
-.container {
-    display: grid;
-    grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr;
-    grid-template-rows: 0.3fr 2.2fr 0.3fr;
-    gap: 0px 0px;
-    grid-template-areas:
-    ". . Navigation . ."
-    "left ProfileArea ProfileArea ProfileArea right"
-    "Footer Footer Footer Footer Footer";
-    height: 100vh; /* Pełna wysokość viewport */
-    width: 100vw;  /* Pełna szerokość viewport */
-    background-color: #F9FAF5;
-    margin: 0;     /* Usuń domyślne marginsy */
-    padding: 0;    /* Usuń domyślne paddingi */
-}
-
-/* Dodaj też reset dla body i html */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden; /* Usuń poziomy scrollbar jeśli się pojawi */
-}
-
-.ProfileArea {
-    grid-area: ProfileArea;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 20px;
-    height: 100%; /* Wypełnij całą dostępną wysokość */
-    overflow-y: auto; /* Dodaj scroll jeśli treść będzie za długa */
-}
-
-.Navigation {
-    grid-area: Navigation;
-}
-
-.Footer {
-    grid-area: Footer;
-}
-
 .main{
-    width: 100%;
+    width: 70%;
+    align-items: flex-start;
 }
 
 .name{
