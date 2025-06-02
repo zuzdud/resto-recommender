@@ -155,6 +155,7 @@ html, body, #root {
     grid-template-areas:
     "searchbar-space"
     "logo-picture";
+    margin-bottom: 40px;
 }
 
 /* Boczne elementy dekoracyjne (SZACHOWNICE) */
