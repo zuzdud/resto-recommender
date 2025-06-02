@@ -1,0 +1,27 @@
+.main{
+    width: 70%;
+}
+
+.sidebar{
+    background-color: #72aaff;
+    width: 25%;
+
+}
+
+.inner-html{
+    background-color: #00eadf;
+    width: 70%;
+    height: 200px;
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 8px;
+    color: #000;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    font-weight: 600;
+
+}
