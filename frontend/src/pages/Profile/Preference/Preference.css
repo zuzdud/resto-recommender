@@ -1,0 +1,15 @@
+.main-cont{
+    width: 85%;
+}
+
+.cont{
+    border-color: #9E454A;
+}
+
+.super-shadow{
+    /*
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    */
+    box-shadow: 0 20px 30px rgba(169, 76, 76, 0.4);
+
+}
