@@ -17,20 +17,12 @@
     grid-area: Navigation;
 }
 
-.Area {  display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-    "."
-    "."
-    "."
-    ".";
+.Area {
     grid-area: Area;
-    background-color: #9ac6c4;
+    /* Usuń wszystkie grid properties! */
     min-height: 82vh;
     margin-bottom: 40px;
+
 }
 
 
