@@ -3,6 +3,8 @@ import styles from './home.module.css'
 import '../../styles/index.css'
 import Searchbar from "../../components/common/Searchbar/Searchbar.jsx";
 import logo from '../../assets/logo5.jpg';
+import {Link} from "react-router-dom";
+
 
 export default function Home() {
 
@@ -18,8 +20,7 @@ export default function Home() {
                     <div className={styles.footerSection}>
                         <h4>Links</h4>
                         <ul>
-                            <li><a href="http://localhost:5173/home">Homepage</a></li>
-                            <li><a href="#">Map</a></li>
+                            <li><a href="/home">Homepage</a></li>
                             <li><a href="#">About us</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
@@ -38,17 +39,16 @@ export default function Home() {
             </div>
             <div className={styles.navigation}>
                 <div className={styles.minilogo}>
-                    <h4>What's for dinner</h4>
+                    <Link to="/">
+                        <h4>What's for dinner</h4>
+                    </Link>
                 </div>
                 <div className={styles["menu-bttn"]}>
                     <ul>
                         <li>
-                            <a href="http://localhost:5173/discover">
+                            <a href="/discover">
                                 <button type="button">Discover</button>
                             </a>
-                        </li>
-                        <li>
-                            <button>Menu</button>
                         </li>
                         <li>
                         <button>Contact</button>
@@ -68,7 +68,7 @@ export default function Home() {
                             </label>
                         </li>
                         <li>
-                            <a href="http://localhost:5173/login">
+                            <a href="/login">
                                 <button type="button">Login</button>
                             </a>
                         </li>

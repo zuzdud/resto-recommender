@@ -3,7 +3,7 @@
    =========================================== */
 @font-face {
     font-family: 'HarlowSolidItalic';
-    src: url('../../../public/HARLOWSI_1.TTF') format('truetype');
+    src: url('../../../assets/fonts/HARLOWSI.TTF') format('truetype');
 }
 .navigation {
     grid-area: navigation;
@@ -25,12 +25,21 @@
 .minilogo {
     grid-area: minilogo;
     text-align: left;
-    padding-left: 100px;
+    padding-left: 20px;
 }
 .minilogo h4 {
     text-shadow: 0 0 10px #eb8a8a;
     font-family: 'HarlowSolidItalic', cursive;
     font-size: 30px;
+    white-space: nowrap;
+}
+.minilogo a {
+    text-decoration: none; /* usuń podkreślenie */
+    color: inherit; /* zachowaj kolor z h4 */
+}
+
+.minilogo {
+    cursor: pointer; /* pokaż że można kliknąć */
 }
 
 /* Przyciski menu */

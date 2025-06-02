@@ -1,4 +1,6 @@
 import styles from './Navigation.module.css';
+import {Link} from "react-router-dom";
+import React from "react";
 
 
 function Navigation() {
@@ -6,12 +8,14 @@ function Navigation() {
     return (
         <div className={styles.navigation}>
             <div className={styles.minilogo}>
-                <h4 className={styles.minilogo}>What's for dinner</h4>
+                <Link to="/">
+                    <h4>What's for dinner</h4>
+                </Link>
             </div>
             <div className={styles["menu-bttn"]}>
                 <ul>
                     <li>
-                        <a href="http://localhost:5173/discover">
+                        <a href="/discover">
                             <button type="button">Discover</button>
                         </a>
                     </li>
@@ -33,7 +37,7 @@ function Navigation() {
                         </label>
                     </li>
                     <li>
-                        <a href="http://localhost:5173/login">
+                        <a href="/login">
                             <button type="button">Login</button>
                         </a>
                     </li>

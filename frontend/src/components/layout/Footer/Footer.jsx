@@ -13,7 +13,7 @@ function Footer(){
                 <div className={styles.footerSection}>
                     <h4>Links</h4>
                     <ul>
-                        <li><a href="http://localhost:5173/home">Homepage</a></li>
+                        <li><a href="/">Homepage</a></li>
                         <li><a href="#">Map</a></li>
                         <li><a href="#">About us</a></li>
                         <li><a href="#">Contact</a></li>

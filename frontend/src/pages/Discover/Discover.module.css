@@ -1,15 +1,12 @@
-.container {  display: grid;
-    grid-template-columns: 0.6fr 1.9fr 0.5fr;
-    grid-template-rows: 0.1fr 2.3fr 0.4fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
+.container {
+    display: grid;
+    grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr; /* jak w home */
+    grid-template-rows: 0.3fr 2.2fr 0.3fr;
     grid-template-areas:
-    "Navigation Navigation Navigation"
-    ". Area ."
-    "footer footer footer";
-    height: 100vh;
-    width: 100%;
-    background-color: #F9FAF5;
+    ". . Navigation . ."
+    ". Area Area Area ."  /* lub zostaw środek szerszy */
+    "footer footer footer footer footer";
+    /* reszta bez zmian */
 }
 
 .Footer {

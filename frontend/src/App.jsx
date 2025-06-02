@@ -1,5 +1,5 @@
 import Home from './pages/Home/Home.jsx'
-import Homepage from './pages/Homepage/Homepage.jsx'
+
 import Signpage from "./pages/Auth/Signup/Signpage.jsx";
 import Discover from "./pages/Discover/Discover.jsx";
 
@@ -17,8 +17,7 @@ function App() {
     return(
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Homepage/>} />
-                    <Route path="/home" element={<Home/>} />
+                    <Route path="/" element={<Home/>} />
                     <Route path="/login" element={<Signpage/>} />
                     <Route path="/discover" element={<Discover />} />
                     <Route path="/profile" element={<PrivateRoute />}>
@@ -37,5 +36,5 @@ function App() {
     );
 
 }
-
+// <Route path="/" element={<Homepage/>} />
 export default App

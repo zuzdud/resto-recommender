@@ -9,7 +9,7 @@
 }
 @font-face {
     font-family: 'HarlowSolidItalic';
-    src: url('../../public/HARLOWSI_1.TTF') format('truetype');
+    src: url('../../assets/fonts/HARLOWSI.TTF') format('truetype');
 }
 
 html, body, #root {
@@ -62,6 +62,14 @@ html, body, #root {
     text-shadow: 0 0 10px #eb8a8a;
     font-family: 'HarlowSolidItalic', cursive;
     font-size: 30px;
+}
+.minilogo a {
+    text-decoration: none; /* usuń podkreślenie */
+    color: inherit; /* zachowaj kolor z h4 */
+}
+
+.minilogo {
+    cursor: pointer; /* pokaż że można kliknąć */
 }
 
 /* Przyciski menu */

@@ -1,5 +1,35 @@
+.container {
+    display: grid;
+    grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr;
+    grid-template-rows: 0.3fr 2.2fr 0.3fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    ". . Navigation . ."
+    ". ProfileArea ProfileArea ProfileArea ."
+    "Footer Footer Footer Footer Footer";
+    height: 100vh;
+    width: 100%;
+    background-color: #F9FAF5;
+}
+
+.Navigation {
+    grid-area: Navigation;
+}
+
+.ProfileArea {
+    grid-area: ProfileArea;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+}
+
+.Footer {
+    grid-area: Footer;
+}
+
 .main{
-    width: 70%;
+    width: 100%;
 }
 
 .name{

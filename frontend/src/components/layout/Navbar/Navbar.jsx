@@ -27,9 +27,6 @@ export default function Navbar() {
                             <Link className="nav-link active" to="/discover">Discover</Link>
                         </li>
                         <li className="nav-item mx-4">
-                            <Link className="nav-link active" to="/menu">Menu</Link>
-                        </li>
-                        <li className="nav-item mx-4">
                             <Link className="nav-link active" to="/contact">Contact</Link>
                         </li>
                         <li className="nav-item mx-4">
