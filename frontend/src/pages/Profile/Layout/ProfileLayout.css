@@ -1,5 +1,6 @@
 .main{
     width: 70%;
+    align-items: flex-start;
 }
 
 .name{

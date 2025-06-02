@@ -74,7 +74,7 @@ function ProfileLayout(){
 
                     </div>
                     <div className="inner-html rounded-4 p-4 m-2">
-                    <Outlet/>
+                        <Outlet/>
                     </div>
                 </div>
             </div>
