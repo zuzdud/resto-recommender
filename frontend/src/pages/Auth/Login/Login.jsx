@@ -43,8 +43,8 @@ export function LoginForm(){
 }*/
 
 import {useState} from "react";
-import { Input } from "../Components/Input/Input.jsx";
-import "../../CSS/sign.css"
+import { Input } from "../../../components/ui/Input/Input.jsx";
+import "../Signup/sign.css"
 
 export function LoginForm(){
 
