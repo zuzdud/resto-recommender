@@ -31,8 +31,12 @@ def get_restaurants(request):
                      "supermarket", "gas_station"}  # Types to exclude
     place_types = {"restaurant", "food", "meal_takeway", "cafe"}
     all_places = []
+    MAX_RESULTS=5       # TO USUNĄĆ EWENTUALNIE
 
     for place_type in place_types:
+        if len(only_restaurants) >= MAX_RESULTS:  # Stop if we have enough results
+            break
+
         next_page_token = request.GET.get("pagetoken")
         while True:
             params = {
@@ -55,10 +59,17 @@ def get_restaurants(request):
                 filtered_restaurants = [
                     restaurant for restaurant in places
                     if any(type in place_types for type in restaurant.get("types", []))
-                    and not any(type in exclude_types for type in restaurant.get("types", []))
+                       and not any(type in exclude_types for type in restaurant.get("types", []))
                 ]
 
-                only_restaurants.extend(filtered_restaurants)
+                # Add restaurants but limit to max_results
+                remaining_slots = MAX_RESULTS - len(only_restaurants)
+                only_restaurants.extend(filtered_restaurants[:remaining_slots])
+
+                # Stop if we have enough results
+                if len(only_restaurants) >= MAX_RESULTS:
+                    break
+
                 # Get next page token safely
                 next_page_token = data.get("next_page_token", None)
 

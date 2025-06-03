@@ -185,7 +185,8 @@ class Ratings(models.Model):
 class Restaurants(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    location = models.TextField()  # This field type is a guess.
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
     cuisine = models.CharField(max_length=100)
     image = models.TextField(blank=True, null=True)
     external_url = models.TextField(db_collation='utf8mb4_bin', blank=True, null=True)
