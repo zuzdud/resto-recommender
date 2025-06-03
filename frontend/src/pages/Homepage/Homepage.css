@@ -1,0 +1,143 @@
+.HomepageLayout{
+    background-color: rgba(249, 250, 245, 0.94);
+    min-height: 100vh;
+
+}
+
+
+.main-content{
+    height: 10vh;
+}
+
+.buttons{
+    text-align: center;
+    margin-right: 70px;
+    background-color: black;
+}
+
+
+/*.logo {
+    background-color: rgba(249, 250, 245, 0.94);
+    !*margin-bottom: 20px;*!
+    margin-top: 0;
+
+    height: 50vh;
+    aspect-ratio: 1 / 1;
+
+    background-image: url('../../assets/logo5.jpg'); !* ✅ poprawna ścieżka *!
+    background-size: contain;                 !* ✅ dopasuj obraz *!
+    background-repeat: no-repeat;             !* ✅ nie powtarzaj *!
+    background-position: center;              !* ✅ wycentruj *!
+}*/
+
+/*
+.img-placeholder{
+    width: calc(100% - 100px);
+    height: 50vh;
+}
+
+.logo-img{
+    height: 80vh;
+}
+*/
+
+
+.pattern{
+    width: 50px;
+    /*height: 80vh;*/
+    /*height: calc(50vw - 50px);*/
+    height: 80vh;
+
+    background-image:
+        linear-gradient(45deg, #662222 25%, transparent 25%),
+        linear-gradient(-45deg, #662222 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #662222 75%),
+        linear-gradient(-45deg, transparent 75%, #662222 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+
+.row{
+    width: 100%;
+}
+
+
+@media (max-width: 768px){
+    .logo, .pattern{
+        height: calc(100vw - 100px);
+    }
+
+
+}
+
+
+
+
+
+
+.checkerboard {
+    display: grid;
+    grid-template-columns: repeat(5, 10px);
+    grid-auto-rows: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.square {
+    width: 100%;
+    height: 100%;
+}
+
+
+.dark {
+    background-color: #662222;
+}
+
+.pattern {
+    width: 50px; /* 5 kolumn × 10px = 50px */
+    background-color: #f9faf5;
+    background-image:
+            linear-gradient(45deg, #662222 25%, transparent 25%),
+            linear-gradient(-45deg, #662222 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #662222 75%),
+            linear-gradient(-45deg, transparent 75%, #662222 75%);
+    background-size: 20px 20px; /* 10x10 kratka */
+    background-repeat: repeat;
+    height: 103%;
+}
+
+
+.page-layout {
+    height: 85vh;
+}
+
+.side-column {
+    display: flex;
+    align-items: stretch;
+}
+
+.main-content {
+    background-color: #fafafa;
+}
+
+.for-img{
+    width: calc(100% - 100px);
+    height: 100%;
+}
+
+.img-placeholder{
+    height: 80vh;
+    width: 80vw;
+    background-color: white;
+
+}
+
+.logo-img {
+    height: 100%;
+
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}

@@ -29,7 +29,9 @@
 .rc-slider-mark-text {
     white-space: nowrap;
     font-size: 0.85rem;        /* zmniejsz tekst jeśli trzeba */
+    /*
     overflow: hidden;
+    */
     text-overflow: ellipsis;   /* opcjonalnie dodaje "…" przy przepełnieniu */
 }
 
@@ -42,3 +44,11 @@ input[type="checkbox"] {
 .d-flex .btn{
     background-color: #9E454A;
 }*/
+
+
+
+@media (max-width: 768px){
+    .contener{
+        width: 100%;
+    }
+}

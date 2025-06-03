@@ -8,22 +8,18 @@ export default function Navbar() {
     const username = localStorage.getItem("username");*/
     const navigate = useNavigate();
 
-    const isLoggenIn = false;
+    const isLoggenIn = true;
     const username = "Isztwan";
 
     const logout = () => {
         localStorage.clear();
-        navigate("/");
+        navigate("/home");
     };
 
     return (
 
-        /*
-                <nav className="navbar navbar-light navbar-expand-lg fixed-top my-4 mx-auto">
-        */
-        <nav className="navbar navbar-light navbar-expand-lg py-5 mx-auto">
-
-            <div className="container-fluid">
+        <nav className="navbar navbar-expand-md py-4 mx-auto">
+            <div className="container-fluid px-0">
                 <Link className="navbar-name ms-3 justify-content-center align-items-center" to="/">What's for
                     dinner</Link>
 
@@ -34,7 +30,7 @@ export default function Navbar() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav mx-auto mb-2 mb-md-0">
                         <li className="nav-item mx-4 px-1 else rounded-5">
                             <Link className="nav-link active" to="/discover">Discover</Link>
                         </li>
@@ -44,22 +40,13 @@ export default function Navbar() {
                         <li className="nav-item mx-4 px-1 else rounded-5">
                             <Link className="nav-link active" to="/about">About</Link>
                         </li>
-{/*
-                        <li className="nav-item">
-                             Możesz tutaj dać warunek login/logout, np.
-                             {isLoggedIn ? <Link ...>Logout</Link> : <Link ...>Login</Link>}
-                        </li>*/}
+
                     </ul>
 
                     {/* Login/Logout */}
-                    <ul className="navbar-nav  mb-2 mb-lg-0 me-5">
-                        <li className="nav-item ">
-{/*                            <Link className="nav-link active btn rounded-4" to="/sign">
-                                <button type="button" className="btn btn-dark rounded-4">
-                                    Sign in
-                                </button>
-                                Sign in
-                            </Link>*/}
+                    <ul className="navbar-nav  mb-2 mb-md-0 me-5">
+                        <li className="nav-item mx-2 px-1 ">
+
                             {isLoggenIn?(
                                 <div className="dropdown rounded-5">
                                     <button className="btn btn-dark dropdown-toggle  rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,5 +74,10 @@ export default function Navbar() {
         </nav>
 
     );
+
+
+
+
+
 }
 

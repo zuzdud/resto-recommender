@@ -11,6 +11,7 @@ import React from "react";
 import Settings from "./pages/Profile/Settings.jsx";
 import ProfileOptions from "./pages/Profile/ProfileOptions.jsx";
 import Preference from "./pages/Profile/Preference/Preference.jsx";
+import Homepage from "./pages/Homepage/Homepage.jsx";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home/>} />
+                    <Route path="/home" element={<Homepage/>}/>
                     <Route path="/login" element={<Signpage/>} />
                     <Route path="/discover" element={<Discover />} />
                     <Route path="/profile" element={<PrivateRoute />}>

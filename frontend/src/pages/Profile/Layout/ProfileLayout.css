@@ -3,6 +3,10 @@
     min-height: 100vh;
 }
 
+.ProfileArea{
+    min-height: calc(100vh - 2*48px - 45px);
+}
+
 .main{
     width: 70%;
     align-items: flex-start;
@@ -34,4 +38,13 @@
 .sidebar a.active {
     font-weight: 600;
 
+}
+
+@media (max-width: 768px){
+    .inner-html, .sidebar{
+        width: 100%;
+    }
+        .main{
+            width: 90%;
+        }
 }

@@ -3,6 +3,7 @@ import "./ProfileLayout.css"
 import React from "react";
 import {NavLink, Outlet, useNavigate} from "react-router-dom";
 import Navigation from "../../../components/layout/Navigation/Navigation.jsx";
+import Footer from "../../../Components/ui/B-Footer/Footer.jsx";
 function ProfileLayout(){
    // const [activeTab, setActiveTab] = useState("profile");
     const navigate = useNavigate();
@@ -21,10 +22,10 @@ function ProfileLayout(){
     return(
         <div className="ProfileLayout">
             <Navbar/>
-            <div className="left"></div> {/* Dodaj left szachownicę */}
-            <div className="ProfileArea">
-                <div className="main d-flex mx-auto justify-content-center">
-                    <div className="sidebar rounded-4 p-4 m-2">
+
+            <div className="ProfileArea mx-auto">
+                <div className="main d-flex flex-column flex-md-row mx-auto justify-content-center">
+                    <div className="sidebar rounded-4 p-4">
                         <h3 className="name pb-2 border-bottom border-black">Profil</h3>
                         <NavLink
                             to="/profile"
@@ -66,13 +67,12 @@ function ProfileLayout(){
                         </NavLink>
 
                     </div>
-                    <div className="inner-html rounded-4 p-4 m-2">
+                    <div className="inner-html rounded-4 p-4">
                         <Outlet/>
                     </div>
                 </div>
             </div>
-            <div className="right"></div> {/* Dodaj right szachownicę */}
-            <div className="Footer"></div> {/* Dodaj footer */}
+            <Footer/>
         </div>
     )
 }

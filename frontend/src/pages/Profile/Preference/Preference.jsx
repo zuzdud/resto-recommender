@@ -2,8 +2,11 @@ import {useState} from "react";
 import "./Preference.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { useWindowWidth } from '../../../HTML/Components/useWindowWidth';
+
 
 function Preference(){
+    const width = useWindowWidth();
     const userStylePreferences = [
         { name: "vege", selected: true },
         { name: "glutFree", selected: false },
@@ -58,6 +61,7 @@ function Preference(){
         console.log("Selected avoid preferences:", avoidPreferences);
         console.log("Selected favorite preferences:", favPreferences);
         console.log("Selected value:", value);
+        console.log(width)
     };
 
     return(
@@ -132,7 +136,8 @@ function Preference(){
                 <div className="main-cont super-shadow p-2 mb-4">
                     <div className="d-flex align-items-baseline">
                         <h4 className="me-3">4. Ile masz czasu na posiłek? </h4>
-                        <h5>{" "}{value === 60 ? "Nie spieszy mi się" : `${value} min`}</h5>
+                        <h5>{" "}{value === 60  ? width > 768 ? "Nie spieszy mi się" : "+45 min" : `${value} min`}</h5>
+
                     </div>
 
 
@@ -146,7 +151,7 @@ function Preference(){
                                     15: "15 min",
                                     30: "30 min",
                                     45: "45 min",
-                                    60: "Nie spieszy mi się",
+                                    60: width > 768 ? "Nie spieszy mi się" : "+45 min",
                                 }}
                                 onChange={(val) => setValue(val)}
                             />

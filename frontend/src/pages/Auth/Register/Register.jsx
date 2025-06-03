@@ -66,7 +66,7 @@ export function RegisterForm() {
 
 
 import { useState } from "react";
-import { Input } from "../../../HTML/Components/Input/Input.jsx";
+import { Input } from "../../../Components/ui/Input/Input.jsx";
 import "../Signup/sign.css"
 
 export function RegisterForm() {
