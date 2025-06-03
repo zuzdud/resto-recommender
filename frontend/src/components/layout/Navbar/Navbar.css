@@ -2,7 +2,10 @@
   height: 10%;
   width: 100%;
 }*/
-
+@font-face {
+    font-family: 'HarlowSolidItalic';
+    src: url('../../../assets/fonts/HARLOWSI.TTF') format('truetype');
+}
 
 .navbar{
     background-color: rgba(249, 250, 245, 0.94);
@@ -13,10 +16,14 @@
 .navbar-name{
 
     font-weight: 500;
-    font-size: 23px;
-    height: 40px;
+
+/*    height: 40px;*/
     text-decoration: none;
-    color: #486550;
+    color: #662222;
+    text-shadow: 0 0 10px #eb8a8a;
+    font-family: 'HarlowSolidItalic', cursive;
+    font-size: 30px;
+    white-space: nowrap;
 }
 
 
@@ -25,12 +32,21 @@
     width: 100px;
 }
 
-.nav-item a:hover{
-    cursor: pointer;
-    color: rgba(255, 0, 0, 0.71);
-    /*
-    color: #c13584;
-    */
+.else:hover{box-shadow: 0 0 10px #eda1a1;background-color: #eda1a1;}
+
+
+/*
+
+
+.dropdown{
+    box-shadow: 0 0 10px #eda1a1;background-color: #eda1a1;
+}
+*/
+
+.else{
+
+
+
 }
 
 @media (max-width: 500px) {
