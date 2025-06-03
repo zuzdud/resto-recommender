@@ -8,12 +8,22 @@ from backend import settings
 from .serializers import RestaurantSerializer, ClientsSerializer, FavoritesSerializer, LoginAttemptsSerializer, PreferencesSerializer, RatingsSerializer, RestaurantsSerializer 
 from .models import *
 
-
+def api_root(request):
+    return JsonResponse({
+        "endpoints": [
+            "/api/clients",
+            "/api/favorites",
+            "/api/ratings",
+            "/api/preferences",
+            "/api/restaurants",
+            "/api/allrestaurants"
+        ]
+    })
 def get_restaurants(request):
     google_places_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     place_details_url = "https://maps.googleapis.com/maps/api/place/details/json"
     location = request.GET.get("location", "51.1079,17.0385")  # Default: WRO
-    radius = request.GET.get("radius", "7000")  # 7km search radius
+    radius = request.GET.get("radius", "500")  # 7km search radius
 
     api_key = settings.GOOGLE_MAPS_API_KEY
     only_restaurants = []

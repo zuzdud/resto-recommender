@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './RestaurantPanel.css';
+import axios from "axios";
 
 const RestaurantPanel = () => {
     const [restaurants, setRestaurants] = useState([]); // restaurants = [] (pusta lista na początku)
@@ -8,68 +9,66 @@ const RestaurantPanel = () => {
     const [sections, setSections] = useState([]);
 
     // Zmień URL na swój backend
-    const API_BASE_URL = 'http://localhost:8000/api'; // lub jaki masz port
+    const API_BASE_URL = 'http://localhost:5176/api'; // lub jaki masz port
 
     // Funkcje do pobierania danych z Django API
     const fetchBestRatedRestaurants = async () => {
-        const response = await fetch(`${API_BASE_URL}/restaurants/top-rated/`); // await - czeka aż serwer odpowie (nie blokuje strony)
+        const response = await axios.get(`${API_BASE_URL}/restaurants/top-rated/`); // await - czeka aż serwer odpowie (nie blokuje strony)
 
-        if (!response.ok) throw new Error('Failed to fetch top rated restaurants');
-        return await response.json();   // response.json() - przekształca tekst z serwera na JavaScript object
+       // if (!response.ok) throw new Error('Failed to fetch top rated restaurants');
+        return await response.data;   // response.json() - przekształca tekst z serwera na JavaScript object
                                         // await - czeka aż konwersja się skończy
                                         // return zwraca dane do kodu który wywołał funkcję
     };
 
     const fetchRestaurantByCuisine = async (cuisine) => {
-        const response = await fetch(`${API_BASE_URL}/restaurants/cuisine/${cuisine}/`);
+        const response = await axios.get(`${API_BASE_URL}/restaurants/cuisine/${cuisine}/`);
 
-        if (!response.ok) throw new Error(`Failed to fetch ${cuisine} restaurants`);
-        return await response.json();
+       // if (!response.ok) throw new Error(`Failed to fetch ${cuisine} restaurants`);
+        return await response.data;
     }
 
     const fetchRecentRestaurants = async () => {
-        const response = await fetch(`${API_BASE_URL}/restaurants/recent/`);
-        if (!response.ok) throw new Error('Failed to fetch recent restaurants');
-        return await response.json();
+        const response = await axios.get(`${API_BASE_URL}/restaurants/recent/`);
+       // if (!response.ok) throw new Error('Failed to fetch recent restaurants');
+        return await response.data;
     };
 
     // Pobieranie danych z API
-    useEffect(() => {                                // gdy komponent się załaduje, wykonuj to
-        const fetchAllData = async () => {          // funkcja wewnętrzna
+    useEffect(() => {
+    const fetchAllData = async () => {
+        setLoading(true);
+        try {
+            const [bestRatedResponse, asianCuisineResponse, recentResponse] = await Promise.all([
+                fetchBestRatedRestaurants(),
+                fetchRestaurantByCuisine('Asian'),
+                fetchRecentRestaurants()
+            ]);
+
+            const bestRated = bestRatedResponse.restaurants || bestRatedResponse;
+            const asianCuisine = asianCuisineResponse.restaurants || asianCuisineResponse;
+            const recentRestaurants = recentResponse.restaurants || recentResponse;
+
+            const sectionsData = [
+                { title: "Najlepiej oceniane", data: bestRated },
+                { title: "Kuchnia azjatycka", data: asianCuisine },
+                { title: "Nowe nieodkryte", data: recentRestaurants }
+            ];
+
+            setSections(sectionsData);
+            setRestaurants({ bestRated, asianCuisine, recentRestaurants });
+
+        } catch (error) {
+            console.error('Axios error:', error);
+            setSections([]);
+        } finally {
             setLoading(false);
-            try {
-                // Pobierz wszystkie sekcje równolegle
-                const [bestRatedResponse, asianCuisineResponse, recentResponse] = await Promise.all([   // Promise all = wykonuje wszystkie żądania równolegle
-                    fetchBestRatedRestaurants(),
-                    fetchRestaurantByCuisine('Asian'),
-                    fetchRecentRestaurants()
-                ]);
+        }
+    };
 
-                // Jeśli API zwraca {restaurants: [..]}
-                const bestRated = bestRatedResponse.restaurants || bestRatedResponse;       // zależy od formatu danych jaki przyjmiemy
-                const asianCuisine = asianCuisineResponse.restaurants || asianCuisineResponse;
-                const recentRestaurants = recentResponse.restaurants || recentResponse;
+    fetchAllData();
+}, []);
 
-                const sectionsData = [      // Organizujemy dane w sekcje
-                    { title: "Najlepiej oceniane", data: bestRated },
-                    { title: "Kuchnia azjatycka", data: asianCuisine },
-                    { title: "Nowe nieodkryte", data: recentRestaurants }
-                ];
-
-                setSections(sectionsData);      // Zapisujemy dane w state, do wyświetlania sekcji
-                setRestaurants({ bestRated, asianCuisine, recentRestaurants }); // do przechowania
-
-            } catch (error) {
-                console.error('Error fetching restaurant data:', error);
-                // Pokaż komunikat błędu użytkownikowi
-                setSections([]);    // pokaże pustą listę
-            } finally{
-                setLoading(false);  // ukryj spinner
-            }
-        };
-
-        fetchAllData();
-    }, []);
 
     // Komponent RestaurantCard
     const RestaurantCard = ({ restaurant }) => {
@@ -129,7 +128,6 @@ const RestaurantPanel = () => {
             </div>
         );
     }
-    // Main render
     return (
         <div className="restaurant-panel">
             <div className="panel-header">
