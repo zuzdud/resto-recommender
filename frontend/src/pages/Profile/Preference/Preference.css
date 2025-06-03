@@ -1,5 +1,9 @@
-.main-cont{
+.contener{
     width: 85%;
+}
+
+.main-cont{
+
 }
 
 .cont{
@@ -32,6 +36,9 @@
 
 input[type="checkbox"] {
     accent-color: #9E454A; /* np. pomarańczowy */
-
-
 }
+
+/*
+.d-flex .btn{
+    background-color: #9E454A;
+}*/
