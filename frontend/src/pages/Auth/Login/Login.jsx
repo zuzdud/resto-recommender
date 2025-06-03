@@ -82,7 +82,12 @@ export function LoginForm(){
                                 console.log("Otrzymany token:", token);
 
                                 // Zapisz token do localStorage
-                                localStorage.setItem('token', token);*/
+                                localStorage.setItem("accessToken", accessToken);
+                                localStorage.setItem("refreshToken", refreshToken);
+                                localStorage.setItem("userId", id);
+                                localStorage.setItem("username", name);
+                                localStorage.setItem("email", email);
+                                */
 
                 // Przekieruj użytkownika np. do dashboardu
                 window.location.href = "/";

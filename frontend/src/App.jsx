@@ -22,7 +22,7 @@ function App() {
                     <Route path="/discover" element={<Discover />} />
                     <Route path="/profile" element={<PrivateRoute />}>
                         <Route element={<ProfileLayout />}>
-                            <Route index element={<ProfileOptions />} />
+                            <Route index element={<ProfilePage />} />
                             <Route path="preferences" element={<Preference />} />
                             <Route path="settings" element={<Settings />} />
                             <Route path="reviews" element={<Preference />} />

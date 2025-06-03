@@ -1,3 +1,8 @@
+.ProfileLayout{
+    background-color: rgba(249, 250, 245, 0.94);
+    min-height: 100vh;
+}
+
 .main{
     width: 70%;
     align-items: flex-start;

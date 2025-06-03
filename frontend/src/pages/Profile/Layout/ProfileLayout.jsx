@@ -19,10 +19,8 @@ function ProfileLayout(){
 
 
     return(
-        <div className={"container"}>
-            <div className="Navigation"> {/* Dodaj wrapper dla Navigation */}
-                <Navigation />
-            </div>
+        <div className="ProfileLayout">
+            <Navbar/>
             <div className="left"></div> {/* Dodaj left szachownicę */}
             <div className="ProfileArea">
                 <div className="main d-flex mx-auto justify-content-center">
@@ -59,21 +57,14 @@ function ProfileLayout(){
                         >
                             Moje recenzje
                         </NavLink>
-                        <NavLink
-                            to="/profile/settings"
-                            className={({isActive}) => isActive ? "active" : ""}
-                        >
-                            Ustawienia
-                        </NavLink>
+
                         <NavLink
                             to="/profile/support"
                             className={({isActive}) => isActive ? "active" : ""}
                         >
                             Pomoc i wsparcie
                         </NavLink>
-                        <button onClick={logout} className="btn btn-danger rounded-1 py-1" type="button">
-                            Wyloguj się
-                        </button>
+
                     </div>
                     <div className="inner-html rounded-4 p-4 m-2">
                         <Outlet/>
