@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from .views import get_restaurants, ClientsListView, FavoritesListView, LoginAttemptsListView, PreferencesListView, \
     RatingsListView, RestaurantsListView, api_root, RecentRestaurantsView, \
     TopRatedRestaurantsDBView, RestaurantByCuisineDBView, TopRatedRestaurantsAPIView, \
-    RestaurantByCuisineAPIView
+    RestaurantByCuisineAPIView, ClientBySurnameView, ClientFavoritesView, UserFavoriteRestaurantsBySurnameView
 
 urlpatterns = [
     path('',api_root),
@@ -26,4 +26,7 @@ urlpatterns = [
     # Restauracje z Google Places API
     path('restaurants/api/top-rated/', TopRatedRestaurantsAPIView.as_view(), name='top-rated-api'),
     path('restaurants/api/cuisine/<str:cuisine>/', RestaurantByCuisineAPIView.as_view(), name='by-cuisine-api'),
+    path('api/clients/<str:surname>/', ClientBySurnameView.as_view(), name='client-by-surname'),
+    #path('api/clients/<str:client_surname>/favorites/', ClientFavoritesView.as_view(), name='client-favorites'),
+    path('api/clients/<str:surname>/favorites/', UserFavoriteRestaurantsBySurnameView.as_view(), name='favorites-by-surname')
 ]

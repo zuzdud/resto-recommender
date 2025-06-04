@@ -317,3 +317,85 @@ class RestaurantByCuisineAPIView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=500)
+
+class ClientBySurnameView(APIView):
+    """Zwraca dane klienta na podstawie nazwiska"""
+
+    def get(self, request, surname):
+        try:
+            clients = Clients.objects.filter(surname__icontains=surname)
+
+            if not clients.exists():
+                return Response({"error": "No clients found with that surname"}, status=404)
+
+            data = []
+            for client in clients:
+                preferences = Preferences.objects.filter(client_id=client.id)
+                favorites_count = Favorites.objects.filter(client_id=client.id).count()
+                ratings_count = Ratings.objects.filter(client_id=client.id).count()
+
+                data.append({
+                    "id": client.id,
+                    "name": client.name,
+                    "surname": client.surname,
+                    "email": client.email,
+                    "status": client.status,
+                    "created_at": client.created_at,
+                    #"last_login": client.last_login,
+                    "location": str(client.location),
+                    "preferences": [
+                        {"cuisine": p.cuisine, "location": str(p.location)} for p in preferences
+                    ],
+                    "favorites_count": favorites_count,
+                    "ratings_count": ratings_count,
+                })
+
+            return Response(data)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+class ClientFavoritesView(APIView):
+    """Zwraca listę ulubionych restauracji użytkownika"""
+
+    def get(self, request, client_surname):
+        try:
+            favorites = Favorites.objects.filter(client_surname=client_surname)
+            restaurant_ids = favorites.values_list('restaurant_id', flat=True)
+            restaurants = Restaurants.objects.filter(id__in=restaurant_ids)
+
+            serialized_data = RestaurantsSerializer(restaurants, many=True).data
+            return Response(serialized_data)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+class UserFavoriteRestaurantsBySurnameView(APIView):
+    """Zwraca ulubione restauracje użytkownika na podstawie nazwiska"""
+
+    def get(self, request, surname):
+        try:
+            clients = Clients.objects.filter(surname__icontains=surname)
+
+            if not clients.exists():
+                return Response({"error": "No clients found with that surname"}, status=404)
+
+            data = []
+            for client in clients:
+                favorite_links = Favorites.objects.filter(client_id=client.id)
+                restaurant_ids = [fav.restaurant_id for fav in favorite_links]
+                restaurants = Restaurants.objects.filter(id__in=restaurant_ids)
+
+                serialized_restaurants = RestaurantsSerializer(restaurants, many=True).data
+
+                data.append({
+                    "client_id": client.id,
+                    "name": client.name,
+                    "surname": client.surname,
+                    "favorites": serialized_restaurants
+                })
+
+            return Response(data)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
