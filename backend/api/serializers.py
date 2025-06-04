@@ -17,6 +17,48 @@ class RestaurantSerializer(serializers.Serializer):
     opening_hours = serializers.ListField(
         child=serializers.CharField(), required=False)  # Opening hours
 
+    # Dodaj pola dla kompatybilności z frontendem
+    average_rating = serializers.SerializerMethodField()
+    review_count = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
+    cuisine = serializers.SerializerMethodField()
+
+    def get_average_rating(self, obj):
+        """Mapuj rating na average_rating"""
+        return obj.get('rating', 0)
+
+    def get_review_count(self, obj):
+        """Policz liczbę recenzji z array reviews"""
+        reviews = obj.get('reviews', [])
+        return len(reviews) if reviews else 0
+
+    def get_image_url(self, obj):
+        """Zwróć placeholder image (Google Places nie zwraca bezpośrednio zdjęć)"""
+        return None
+
+    def get_cuisine(self, obj):
+        """Wyciągnij typ kuchni z types"""
+        types = obj.get('type', [])
+        if not types:
+            return 'restaurant'
+
+        # Mapowanie typów Google Places na czytelne nazwy
+        cuisine_mapping = {
+            'restaurant': 'restauracja',
+            'food': 'jedzenie',
+            'meal_takeaway': 'na wynos',
+            'cafe': 'kawiarnia',
+            'bakery': 'piekarnia',
+            'bar': 'bar',
+            'night_club': 'klub nocny'
+        }
+
+        for type_name in types:
+            if type_name in cuisine_mapping:
+                return cuisine_mapping[type_name]
+
+        return types[0] if types else 'restauracja'
+
 
 class ClientsSerializer(serializers.ModelSerializer):
     class Meta:

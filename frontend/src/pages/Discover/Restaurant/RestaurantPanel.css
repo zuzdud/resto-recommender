@@ -220,3 +220,52 @@
         font-size: 1.3rem;
     }
 }
+
+/* Przewijanie restauracji */
+/* Dodaj na końcu RestaurantPanel.css */
+
+/* Carousel styles */
+.restaurant-carousel {
+    overflow: hidden;
+    position: relative;
+    margin: 0 -10px; /* Kompensacja padding */
+}
+
+.nav-btn.disabled {
+    background: #ccc !important;
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}
+
+.nav-btn.disabled:hover {
+    background: #ccc !important;
+    transform: none !important;
+}
+
+/* Aktualizacja dla grid w trybie carousel */
+.restaurant-carousel .restaurant-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    transition: transform 0.3s ease-in-out;
+    align-items: stretch;
+}
+
+/* Responsywność dla carousel */
+@media (max-width: 768px) {
+    .restaurant-carousel .restaurant-grid > div {
+        flex: 0 0 calc(50% - 10px) !important;
+        min-width: 250px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .restaurant-carousel .restaurant-grid > div {
+        flex: 0 0 calc(100% - 10px) !important;
+        min-width: 280px !important;
+    }
+
+    .section-header {
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+}

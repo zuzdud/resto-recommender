@@ -7,6 +7,7 @@ const RestaurantPanel = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
     const [sections, setSections] = useState([]);
+    const [carouselIndexes, setCarouselIndexes] = useState({});
 
     const API_BASE_URL = (typeof process !== 'undefined' && process.env?.REACT_APP_BACKEND_URL)
         ? process.env.REACT_APP_BACKEND_URL
@@ -14,21 +15,20 @@ const RestaurantPanel = () => {
 
     // Funkcje do pobierania danych z Django API
     const fetchBestRatedRestaurants = async () => {
-        const response = await axios.get(`${API_BASE_URL}/restaurants/api/top-rated/`); // Google Places API
+        const response = await axios.get(`${API_BASE_URL}/restaurants/api/top-rated/`);
         return response.data;
     };
 
     const fetchRestaurantByCuisine = async (cuisine) => {
-        const response = await axios.get(`${API_BASE_URL}/restaurants/api/cuisine/${encodeURIComponent(cuisine)}/`); // Google Places API
+        const response = await axios.get(`${API_BASE_URL}/restaurants/api/cuisine/${encodeURIComponent(cuisine)}/`);
         return response.data;
     };
 
     const fetchRecentRestaurants = async () => {
-        const response = await axios.get(`${API_BASE_URL}/restaurants/db/recent/`); // Baza danych
+        const response = await axios.get(`${API_BASE_URL}/restaurants/db/recent/`);
         return response.data;
     };
 
-    // Test connection function
     const testConnection = async () => {
         try {
             console.log(`Testing connection to: ${API_BASE_URL}`);
@@ -39,6 +39,25 @@ const RestaurantPanel = () => {
         } catch (error) {
             console.error('Connection test failed:', error);
             return false;
+        }
+    };
+
+    // Funkcje carousel
+    const slidePrevious = (sectionIndex) => {
+        setCarouselIndexes(prev => ({
+            ...prev,
+            [sectionIndex]: Math.max(0, (prev[sectionIndex] || 0) - 3)
+        }));
+    };
+
+    const slideNext = (sectionIndex) => {
+        const section = sections[sectionIndex];
+        if (section && section.data) {
+            const maxIndex = Math.max(0, section.data.length - 3);
+            setCarouselIndexes(prev => ({
+                ...prev,
+                [sectionIndex]: Math.min(maxIndex, (prev[sectionIndex] || 0) + 3)
+            }));
         }
     };
 
@@ -57,7 +76,6 @@ const RestaurantPanel = () => {
 
                 console.log('✅ Connection OK, starting to fetch all restaurant data...');
 
-                console.log('📥 Fetching data from all endpoints...');
                 const [bestRatedData, asianCuisineData, recentData] = await Promise.all([
                     fetchBestRatedRestaurants().catch(err => {
                         console.error('❌ Error fetching best rated:', err);
@@ -79,7 +97,6 @@ const RestaurantPanel = () => {
                     recent: recentData
                 });
 
-                // Django DRF może zwracać dane bezpośrednio jako array lub w obiekcie z 'results'
                 const bestRated = Array.isArray(bestRatedData) ? bestRatedData : (bestRatedData.results || []);
                 const asianCuisine = Array.isArray(asianCuisineData) ? asianCuisineData : (asianCuisineData.results || []);
                 const recentRestaurants = Array.isArray(recentData) ? recentData : (recentData.results || []);
@@ -95,11 +112,17 @@ const RestaurantPanel = () => {
                 setSections(sectionsData);
                 setRestaurants({ bestRated, asianCuisine, recentRestaurants });
 
+                // Inicjalizuj indeksy carousel
+                const initIndexes = {};
+                sectionsData.forEach((section, index) => {
+                    initIndexes[index] = 0;
+                });
+                setCarouselIndexes(initIndexes);
+
             } catch (error) {
                 console.error('Error fetching restaurant data:', error);
                 console.error('Error details:', error.response?.data || error.message);
 
-                // Ustaw puste sekcje z komunikatem o błędzie
                 setSections([
                     { title: "Najlepiej oceniane", data: [] },
                     { title: "Kuchnia azjatycka", data: [] },
@@ -116,7 +139,14 @@ const RestaurantPanel = () => {
     // Komponent RestaurantCard
     const RestaurantCard = ({ restaurant }) => {
         const averageRating = restaurant.average_rating || restaurant.rating || 0;
-        const reviewCount = restaurant.review_count || 0;
+
+        let reviewCount = 0;
+        if (restaurant.review_count !== undefined) {
+            reviewCount = restaurant.review_count;
+        } else if (restaurant.reviews && Array.isArray(restaurant.reviews)) {
+            reviewCount = restaurant.reviews.length;
+        }
+
         const imageUrl = restaurant.image_url || default_pic;
 
         const handleRestaurantClick = (id) => {
@@ -147,27 +177,69 @@ const RestaurantPanel = () => {
         );
     };
 
-    // Komponent RestaurantSection
-    const RestaurantSection = ({ title, restaurants }) => (
-        <div className="restaurant-section">
-            <div className="section-header">
-                <h3>{title}</h3>
-                <div className="section-nav">
-                    <button className="nav-btn prev">‹</button>
-                    <button className="nav-btn next">›</button>
+    // Komponent RestaurantSection z carousel
+    const RestaurantSection = ({ title, restaurants, sectionIndex }) => {
+        const currentIndex = carouselIndexes[sectionIndex] || 0;
+        const canGoLeft = currentIndex > 0;
+        const canGoRight = currentIndex + 3 < restaurants.length;
+
+        // Pokaż tylko 3 restauracje na raz
+        const visibleRestaurants = restaurants.slice(currentIndex, currentIndex + 3);
+
+        console.log(`Section ${sectionIndex} (${title}): currentIndex=${currentIndex}, total=${restaurants.length}, visible=${visibleRestaurants.length}`);
+
+        return (
+            <div className="restaurant-section">
+                <div className="section-header">
+                    <h3>{title}</h3>
+                    <div className="section-nav">
+                        <button
+                            className="nav-btn prev"
+                            onClick={() => slidePrevious(sectionIndex)}
+                            disabled={!canGoLeft}
+                            style={{
+                                backgroundColor: !canGoLeft ? '#ccc' : '#662222',
+                                cursor: !canGoLeft ? 'not-allowed' : 'pointer',
+                                opacity: !canGoLeft ? 0.5 : 1
+                            }}
+                        >
+                            ‹
+                        </button>
+                        <button
+                            className="nav-btn next"
+                            onClick={() => slideNext(sectionIndex)}
+                            disabled={!canGoRight}
+                            style={{
+                                backgroundColor: !canGoRight ? '#ccc' : '#662222',
+                                cursor: !canGoRight ? 'not-allowed' : 'pointer',
+                                opacity: !canGoRight ? 0.5 : 1
+                            }}
+                        >
+                            ›
+                        </button>
+                    </div>
+                </div>
+
+                {/* Simplified Grid - no transform, just show/hide */}
+                <div className="restaurant-grid" style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '20px',
+                    transition: 'opacity 0.3s ease-in-out'
+                }}>
+                    {visibleRestaurants && visibleRestaurants.length > 0 ? (
+                        visibleRestaurants.map((restaurant, index) => (
+                            <div key={restaurant.id || restaurant.place_id || index}>
+                                <RestaurantCard restaurant={restaurant} />
+                            </div>
+                        ))
+                    ) : (
+                        <p>Brak restauracji do wyświetlenia</p>
+                    )}
                 </div>
             </div>
-            <div className="restaurant-grid">
-                {restaurants && restaurants.length > 0 ? (
-                    restaurants.map((restaurant, index) => (
-                        <RestaurantCard key={restaurant.id || restaurant.place_id || index} restaurant={restaurant} />
-                    ))
-                ) : (
-                    <p>Brak restauracji do wyświetlenia</p>
-                )}
-            </div>
-        </div>
-    );
+        );
+    };
 
     // Loading state
     if (loading) {
@@ -191,6 +263,7 @@ const RestaurantPanel = () => {
                         key={index}
                         title={section.title}
                         restaurants={section.data}
+                        sectionIndex={index}
                     />
                 ))}
             </div>
