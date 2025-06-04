@@ -13,7 +13,7 @@ export default function Home() {
             <Navigation />
 
             <div className={styles.logo}>
-                {/*<img className={styles["logo-picture"]} src={logo} /> */}
+                {/* <img className={styles["logo-picture"]} src={logo} />*/}
             </div>
             <div className={styles.right}></div>
             <div className={styles.left}></div>
