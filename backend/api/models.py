@@ -1,7 +1,7 @@
 from django.db import models
 
 class ApiRestaurant(models.Model):
-    id = models.BigAutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=255)
     name = models.CharField(max_length=255)
     cuisine = models.CharField(max_length=100)
     location = models.CharField(max_length=255)
@@ -183,6 +183,7 @@ class Ratings(models.Model):
 
 
 class Restaurants(models.Model):
+    id = models.CharField(primary_key=True, max_length=255)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     latitude = models.FloatField(blank=True, null=True)
