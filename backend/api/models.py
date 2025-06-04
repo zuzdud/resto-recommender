@@ -190,8 +190,26 @@ class Restaurants(models.Model):
     cuisine = models.CharField(max_length=100)
     image = models.TextField(blank=True, null=True)
     external_url = models.TextField(db_collation='utf8mb4_bin', blank=True, null=True)
+    rest_ratings = models.FloatField(default=0.0)  # Zmieniono z 'ratings' na 'rest_ratings'
 
     class Meta:
         managed = False
         db_table = 'restaurants'
-        db_table_comment = 'Tabela zawierajca informacje na temat restauracji. Podajemy  w niej nazwŕ restauracji, lokalizacjŕ, gwny typ kuchni jaki serwuj, zdjcie restauracji oraz link do zewntrznej strony restauracji.'
+        db_table_comment = 'Tabela zawierająca informacje na temat restauracji.'
+
+    # Właściwości do kompatybilności z frontendem
+    @property
+    def image_url(self):
+        """Zwraca URL obrazu lub None jeśli nie ma"""
+        return self.image if self.image else None
+
+    @property
+    def average_rating(self):
+        """Zwraca średnią ocenę"""
+        return float(self.rest_ratings) if self.rest_ratings else 0.0
+
+    @property
+    def review_count(self):
+        """Liczy ilość recenzji dla tej restauracji"""
+        # Używamy related_name 'restaurant_ratings'
+        return self.restaurant_ratings.count() if hasattr(self, 'restaurant_ratings') else 0

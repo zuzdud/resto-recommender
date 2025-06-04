@@ -49,7 +49,23 @@ class RatingsSerializer(serializers.ModelSerializer):
 
 
 class RestaurantsSerializer(serializers.ModelSerializer):
+    # Mapowanie pól z modelu na to czego oczekuje frontend
+    image_url = serializers.CharField(source='image', allow_null=True, required=False)
+    average_rating = serializers.FloatField(source='rest_ratings', default=0.0)  # Zmieniono na 'rest_ratings'
+    review_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Restaurants
-        fields = '__all__'
+        fields = [
+            'id', 'name', 'address', 'cuisine', 'latitude', 'longitude',
+            'image_url', 'average_rating', 'review_count', 'external_url'
+        ]
 
+    def get_review_count(self, obj):
+        """Liczy ilość recenzji dla tej restauracji"""
+        try:
+            # Używamy related_name 'restaurant_ratings'
+            return obj.restaurant_ratings.count()
+        except:
+            # Jeśli nie ma połączenia, zwróć 0
+            return 0

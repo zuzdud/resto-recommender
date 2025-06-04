@@ -1,7 +1,7 @@
 .container {
     display: grid;
     grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr; /* jak w home */
-    grid-template-rows: 0.3fr 2.2fr 0.3fr;
+    grid-template-rows: 0.01fr 2.2fr 0.3fr;
     grid-template-areas:
     ". . Navigation . ."
     ". Area Area Area ."  /* lub zostaw środek szerszy */

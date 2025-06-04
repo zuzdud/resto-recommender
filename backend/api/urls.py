@@ -2,7 +2,8 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from .views import get_restaurants, ClientsListView, FavoritesListView, LoginAttemptsListView, PreferencesListView, \
-    RatingsListView, RestaurantsListView, api_root
+    RatingsListView, RestaurantsListView, api_root, RestaurantByCuisineView, RecentRestaurantsView, \
+    TopRatedRestaurantsView, TopRatedRestaurantsDBView, RestaurantByCuisineDBView
 
 urlpatterns = [
     path('',api_root),
@@ -13,8 +14,15 @@ urlpatterns = [
     path('loginattempts', LoginAttemptsListView.as_view()),
     path('preferences', PreferencesListView.as_view()),
     path('ratings', RatingsListView.as_view()),
-    path('restaurants', RestaurantsListView.as_view()),
-    path('restaurants/top-rated/', RestaurantsListView.as_view()),
-    path('restaurants/recent/', RestaurantsListView.as_view()),
-    path('restaurants/cuisine/<str:cuisine>/', RestaurantsListView.as_view())
+    path('restaurants/', RestaurantsListView.as_view(), name='restaurant-list'),
+
+    # Restauracje z lokalnej bazy danych
+    path('restaurants/', RestaurantsListView.as_view(), name='restaurant-list'),
+    path('restaurants/db/top-rated/', TopRatedRestaurantsDBView.as_view(), name='top-rated-db'),
+    path('restaurants/db/recent/', RecentRestaurantsView.as_view(), name='recent-db'),
+    path('restaurants/db/cuisine/<str:cuisine>/', RestaurantByCuisineDBView.as_view(), name='by-cuisine-db'),
+
+    # Restauracje z Google Places API
+    path('restaurants/api/top-rated/', TopRatedRestaurantsView.as_view(), name='top-rated-api'),
+    path('restaurants/api/cuisine/<str:cuisine>/', RestaurantByCuisineView.as_view(), name='by-cuisine-api'),
 ]

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './RestaurantPanel.css';
 import axios from "axios";
+import default_pic from '../../../assets/default-pic.png';
 
 const RestaurantPanel = () => {
-    const [restaurants, setRestaurants] = useState([]); // restaurants = [] (pusta lista na początku)
-                                                                        // setRestaurants = funkcja do zmiany listy restauracji
+    const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
     const [sections, setSections] = useState([]);
-
 
     const API_BASE_URL = (typeof process !== 'undefined' && process.env?.REACT_APP_BACKEND_URL)
         ? process.env.REACT_APP_BACKEND_URL
@@ -15,40 +14,28 @@ const RestaurantPanel = () => {
 
     // Funkcje do pobierania danych z Django API
     const fetchBestRatedRestaurants = async () => {
-        const response = await axios.get(`${API_BASE_URL}/restaurants/top-rated/`); // await - czeka aż serwer odpowie (nie blokuje strony)
-
-        if (!response.ok) throw new Error('Failed to fetch top rated restaurants');
-        return await response.data;   // response.json() - przekształca tekst z serwera na JavaScript object
-                                        // await - czeka aż konwersja się skończy
-                                        // return zwraca dane do kodu który wywołał funkcję
+        const response = await axios.get(`${API_BASE_URL}/restaurants/api/top-rated/`); // Google Places API
+        return response.data;
     };
 
     const fetchRestaurantByCuisine = async (cuisine) => {
-        const response = await fetch(`${API_BASE_URL}/restaurants/cuisine/${encodeURIComponent(cuisine)}/`);
-
-        if (!response.ok) throw new Error(`Failed to fetch ${cuisine} restaurants`);
-        return await response.data;
-    }
+        const response = await axios.get(`${API_BASE_URL}/restaurants/api/cuisine/${encodeURIComponent(cuisine)}/`); // Google Places API
+        return response.data;
+    };
 
     const fetchRecentRestaurants = async () => {
-        const response = await axios.get(`${API_BASE_URL}/restaurants/recent/`);
-        if (!response.ok) throw new Error('Failed to fetch recent restaurants');
-        return await response.data;
+        const response = await axios.get(`${API_BASE_URL}/restaurants/db/recent/`); // Baza danych
+        return response.data;
     };
 
     // Test connection function
     const testConnection = async () => {
         try {
             console.log(`Testing connection to: ${API_BASE_URL}`);
-            const response = await fetch(`${API_BASE_URL}/restaurants/`);
+            const response = await axios.get(`${API_BASE_URL}/restaurants/`);
             console.log('Connection test response:', response.status);
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Sample data from API:', data);
-                return true;
-            }
-            return false;
+            console.log('Sample data from API:', response.data);
+            return true;
         } catch (error) {
             console.error('Connection test failed:', error);
             return false;
@@ -59,21 +46,31 @@ const RestaurantPanel = () => {
     useEffect(() => {
         const fetchAllData = async () => {
             setLoading(true);
+            console.log('🚀 Starting fetchAllData...');
 
             try {
-                // Najpierw przetestuj połączenie
+                console.log('🔍 Testing connection...');
                 const connectionOk = await testConnection();
                 if (!connectionOk) {
                     throw new Error('Nie można połączyć się z serwerem Django');
                 }
 
-                console.log('Starting to fetch all restaurant data...');
+                console.log('✅ Connection OK, starting to fetch all restaurant data...');
 
-                // Pobierz wszystkie sekcje równolegle
+                console.log('📥 Fetching data from all endpoints...');
                 const [bestRatedData, asianCuisineData, recentData] = await Promise.all([
-                    fetchBestRatedRestaurants(),
-                    fetchRestaurantByCuisine('azjatycka'), // Zgodnie z twoimi endpointami
-                    fetchRecentRestaurants()
+                    fetchBestRatedRestaurants().catch(err => {
+                        console.error('❌ Error fetching best rated:', err);
+                        return [];
+                    }),
+                    fetchRestaurantByCuisine('azjatycka').catch(err => {
+                        console.error('❌ Error fetching asian cuisine:', err);
+                        return [];
+                    }),
+                    fetchRecentRestaurants().catch(err => {
+                        console.error('❌ Error fetching recent restaurants:', err);
+                        return [];
+                    })
                 ]);
 
                 console.log('All data fetched successfully:', {
@@ -100,6 +97,7 @@ const RestaurantPanel = () => {
 
             } catch (error) {
                 console.error('Error fetching restaurant data:', error);
+                console.error('Error details:', error.response?.data || error.message);
 
                 // Ustaw puste sekcje z komunikatem o błędzie
                 setSections([
@@ -117,21 +115,24 @@ const RestaurantPanel = () => {
 
     // Komponent RestaurantCard
     const RestaurantCard = ({ restaurant }) => {
-        // Dane z Twojej bazy danych
-        const averageRating = restaurant.average_rating || 0;
+        const averageRating = restaurant.average_rating || restaurant.rating || 0;
         const reviewCount = restaurant.review_count || 0;
-        const imageUrl = restaurant.image_url || '/api/placeholder/300/200';
+        const imageUrl = restaurant.image_url || default_pic;
 
         const handleRestaurantClick = (id) => {
-            // Przekieruj na stronę szczegółów restauracji
-            // navigate(`/restaurant/${id}`);
             console.log('Clicked restaurant:', id);
         };
 
         return (
             <div className="restaurant-card" onClick={() => handleRestaurantClick(restaurant.id)}>
                 <div className="card-image">
-                    <img src={imageUrl} alt={restaurant.name} />
+                    <img
+                        src={imageUrl}
+                        alt={restaurant.name}
+                        onError={(e) => {
+                            e.target.src = default_pic;
+                        }}
+                    />
                     <div className="rating-badge">
                         ⭐ {averageRating.toFixed(1)}
                     </div>
@@ -139,8 +140,8 @@ const RestaurantPanel = () => {
                 <div className="card-content">
                     <h4>{restaurant.name}</h4>
                     <p className="reviews">{averageRating.toFixed(1)} ⭐ ({reviewCount})</p>
-                    <p className="cuisine">{restaurant.cuisine}</p>
-                    <p className="address">{restaurant.address}</p>
+                    <p className="cuisine">{restaurant.cuisine || restaurant.type || 'Nie podano'}</p>
+                    <p className="address">{restaurant.address || restaurant.vicinity || 'Brak adresu'}</p>
                 </div>
             </div>
         );
@@ -157,9 +158,13 @@ const RestaurantPanel = () => {
                 </div>
             </div>
             <div className="restaurant-grid">
-                {restaurants.map(restaurant => (
-                    <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-                ))}
+                {restaurants && restaurants.length > 0 ? (
+                    restaurants.map((restaurant, index) => (
+                        <RestaurantCard key={restaurant.id || restaurant.place_id || index} restaurant={restaurant} />
+                    ))
+                ) : (
+                    <p>Brak restauracji do wyświetlenia</p>
+                )}
             </div>
         </div>
     );
@@ -173,6 +178,7 @@ const RestaurantPanel = () => {
             </div>
         );
     }
+
     return (
         <div className="restaurant-panel">
             <div className="panel-header">
@@ -190,7 +196,6 @@ const RestaurantPanel = () => {
             </div>
         </div>
     );
-
 };
 
 export default RestaurantPanel;

@@ -2,7 +2,9 @@ import time
 
 import requests
 from django.http import JsonResponse
+from requests import Response
 from rest_framework import generics
+from rest_framework.views import APIView
 
 from backend import settings
 from .serializers import RestaurantSerializer, ClientsSerializer, FavoritesSerializer, LoginAttemptsSerializer, PreferencesSerializer, RatingsSerializer, RestaurantsSerializer 
@@ -11,12 +13,19 @@ from .models import *
 def api_root(request):
     return JsonResponse({
         "endpoints": [
-            "/api/clients",
-            "/api/favorites",
-            "/api/ratings",
-            "/api/preferences",
-            "/api/restaurants",
-            "/api/allrestaurants"
+            "/api/clients/",
+            "/api/favorites/",
+            "/api/ratings/",
+            "/api/preferences/",
+            "/api/restaurants/",
+            "/api/allrestaurants/",
+            "--- Google Places API ---",
+            "/api/restaurants/api/top-rated/",
+            "/api/restaurants/api/cuisine/<cuisine>/",
+            "--- Local Database ---",
+            "/api/restaurants/db/top-rated/",
+            "/api/restaurants/db/recent/",
+            "/api/restaurants/db/cuisine/<cuisine>/",
         ]
     })
 def get_restaurants(request):
@@ -138,3 +147,190 @@ class RatingsListView(generics.ListAPIView):
 class RestaurantsListView(generics.ListAPIView):
     queryset = Restaurants.objects.all()
     serializer_class = RestaurantsSerializer
+
+class TopRatedRestaurantsView(generics.ListAPIView):
+    serializer_class = RestaurantSerializer
+
+    def get_queryset(self):
+        return Restaurants.objects.filter(ratings__gte=4.0).order_by('-ratings')[:10]
+
+class RecentRestaurantsView(generics.ListAPIView):
+    serializer_class = RestaurantSerializer
+
+    def get_queryset(self):
+        # Jeśli masz pole created_at, użyj go. Jeśli nie, posortuj po id
+        return Restaurants.objects.all().order_by('-id')[:10]
+
+class RestaurantByCuisineView(generics.ListAPIView):
+    serializer_class = RestaurantSerializer
+
+    def get_queryset(self):
+        cuisine = self.kwargs['cuisine']
+        return Restaurants.objects.filter(cuisine__icontains=cuisine)
+
+
+
+
+
+
+
+# Pomocnicza funkcja do pobierania restauracji z Google Places
+def fetch_restaurants_from_google_api(location="51.1079,17.0385", radius="5000", min_rating=None, cuisine_type=None, max_results=10):
+    google_places_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+    place_details_url = "https://maps.googleapis.com/maps/api/place/details/json"
+
+    api_key = settings.GOOGLE_MAPS_API_KEY
+    only_restaurants = []
+    exclude_types = {"hotel", "spa", "gym", "lodging", "supermarket", "gas_station"}
+    place_types = {"restaurant", "food", "meal_takeaway", "cafe"}
+
+    for place_type in place_types:
+        if len(only_restaurants) >= max_results:
+            break
+
+        params = {
+            "location": location,
+            "radius": radius,
+            "type": place_type,
+            "key": api_key,
+        }
+
+        # Jeśli szukamy określonej kuchni, dodaj keyword
+        if cuisine_type:
+            params["keyword"] = cuisine_type
+
+        response = requests.get(google_places_url, params=params)
+        data = response.json()
+
+        if isinstance(data, dict):
+            places = data.get("results", [])
+
+            # Filtruj restauracje
+            filtered_restaurants = []
+            for restaurant in places:
+                # Sprawdź typ miejsca
+                if not any(type in place_types for type in restaurant.get("types", [])):
+                    continue
+                if any(type in exclude_types for type in restaurant.get("types", [])):
+                    continue
+
+                # Jeśli szukamy top-rated, sprawdź rating
+                if min_rating and restaurant.get("rating", 0) < min_rating:
+                    continue
+
+                filtered_restaurants.append(restaurant)
+
+            remaining_slots = max_results - len(only_restaurants)
+            only_restaurants.extend(filtered_restaurants[:remaining_slots])
+
+    # Pobierz szczegóły dla każdej restauracji
+    detailed_restaurants = []
+    for restaurant in only_restaurants:
+        place_id = restaurant.get("place_id")
+        if place_id:
+            place_details_params = {
+                "place_id": place_id,
+                "key": api_key,
+            }
+            place_details_response = requests.get(place_details_url, params=place_details_params)
+            place_details_data = place_details_response.json()
+
+            if place_details_data.get("status") == "OK":
+                place_details = place_details_data.get("result", {})
+                restaurant["type"] = place_details.get("types", [])
+                restaurant["reviews"] = place_details.get("reviews", [])
+                restaurant["rating"] = place_details.get("rating")
+                restaurant["opening_hours"] = place_details.get("opening_hours", {}).get("weekday_text", [])
+                detailed_restaurants.append(restaurant)
+
+            time.sleep(0.5)  # Żeby nie przekroczyć limitów API
+
+    return detailed_restaurants
+
+class TopRatedRestaurantsView(APIView):
+    """Pobiera najlepiej oceniane restauracje z Google Places API"""
+
+    def get(self, request):
+        location = request.GET.get("location", "51.1079,17.0385")  # Default: Wrocław
+        radius = request.GET.get("radius", "5000")
+
+        try:
+            # Pobierz restauracje z oceną minimum 4.0
+            restaurants = fetch_restaurants_from_google_api(
+                location=location,
+                radius=radius,
+                min_rating=4.0,
+                max_results=10
+            )
+
+            # Posortuj po ratingu malejąco
+            restaurants.sort(key=lambda x: x.get('rating', 0), reverse=True)
+
+            serialized_data = RestaurantSerializer(restaurants, many=True).data
+            return Response(serialized_data)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+class RestaurantByCuisineView(APIView):
+    """Pobiera restauracje określonej kuchni z Google Places API"""
+
+    def get(self, request, cuisine):
+        location = request.GET.get("location", "51.1079,17.0385")  # Default: Wrocław
+        radius = request.GET.get("radius", "5000")
+
+        # Mapowanie nazw kuchni z polskiego na angielski dla API
+        cuisine_mapping = {
+            'azjatycka': 'asian',
+            'włoska': 'italian',
+            'francuska': 'french',
+            'indyjska': 'indian',
+            'chińska': 'chinese',
+            'japońska': 'japanese',
+            'thai': 'thai',
+            'meksykańska': 'mexican',
+            'amerykańska': 'american',
+            'polska': 'polish'
+        }
+
+        # Użyj mapowania lub przekaż oryginalną nazwę
+        cuisine_keyword = cuisine_mapping.get(cuisine.lower(), cuisine)
+
+        try:
+            restaurants = fetch_restaurants_from_google_api(
+                location=location,
+                radius=radius,
+                cuisine_type=cuisine_keyword,
+                max_results=15
+            )
+
+            serialized_data = RestaurantSerializer(restaurants, many=True).data
+            return Response(serialized_data)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+class RecentRestaurantsView(generics.ListAPIView):
+    """Pobiera najnowsze restauracje z lokalnej bazy danych"""
+    serializer_class = RestaurantsSerializer
+
+    def get_queryset(self):
+        return Restaurants.objects.all().order_by('-id')[:10]
+
+# ============ BAZA DANYCH VIEWS ============
+
+class TopRatedRestaurantsDBView(generics.ListAPIView):
+    """Pobiera najlepiej oceniane restauracje z lokalnej bazy danych"""
+    serializer_class = RestaurantsSerializer
+
+    def get_queryset(self):
+        # Używamy 'rest_ratings' zamiast 'ratings'
+        return Restaurants.objects.filter(rest_ratings__gte=4.0).order_by('-rest_ratings')[:10]
+
+class RestaurantByCuisineDBView(generics.ListAPIView):
+    """Pobiera restauracje określonej kuchni z lokalnej bazy danych"""
+    serializer_class = RestaurantsSerializer
+
+    def get_queryset(self):
+        cuisine = self.kwargs['cuisine']
+        return Restaurants.objects.filter(cuisine__icontains=cuisine)
