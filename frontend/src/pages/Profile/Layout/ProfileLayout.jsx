@@ -20,7 +20,7 @@ function ProfileLayout(){
 
     return(
         <div className={"container"}>
-            <div className="Navigation"> {/* Dodaj wrapper dla Navigation */}
+            <div className="Navigation">
                 <Navigation />
             </div>
             <div className="left"></div> {/* Dodaj left szachownicę */}

@@ -13,8 +13,7 @@ function Footer(){
                 <div className={styles.footerSection}>
                     <h4>Links</h4>
                     <ul>
-                        <li><a href="/">Homepage</a></li>
-                        <li><a href="#">Map</a></li>
+                        <li><a href="/home">Homepage</a></li>
                         <li><a href="#">About us</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
@@ -31,7 +30,7 @@ function Footer(){
                 <p>&copy; {new Date().getFullYear()} What's for dinner. All rights reserved.</p>
             </div>
         </div>
-        );
-        }
+    );
+}
 
-        export default Footer;
+export default Footer;
