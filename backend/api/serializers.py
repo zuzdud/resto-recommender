@@ -52,7 +52,7 @@ class RestaurantsSerializer(serializers.ModelSerializer):
     # Mapowanie pól z modelu na to czego oczekuje frontend
     image_url = serializers.CharField(source='image', allow_null=True, required=False)
     average_rating = serializers.FloatField(source='rest_ratings', default=0.0)  # Zmieniono na 'rest_ratings'
-    review_count = serializers.SerializerMethodField()
+    review_count = serializers.IntegerField(source='num_ratings', default=0)
 
     class Meta:
         model = Restaurants

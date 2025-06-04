@@ -39,13 +39,6 @@
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 3px solid #662222;
-    background: repeating-linear-gradient(
-            90deg,
-            #662222,
-            #662222 10px,
-            transparent 10px,
-            transparent 20px
-    );
     background-size: 20px 3px;
     background-position: bottom;
 }

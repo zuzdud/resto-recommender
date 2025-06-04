@@ -190,7 +190,8 @@ class Restaurants(models.Model):
     cuisine = models.CharField(max_length=100)
     image = models.TextField(blank=True, null=True)
     external_url = models.TextField(db_collation='utf8mb4_bin', blank=True, null=True)
-    rest_ratings = models.FloatField(default=0.0)  # Zmieniono z 'ratings' na 'rest_ratings'
+    rest_ratings = models.FloatField(default=0.0)  # Średnia ocen
+    num_ratings = models.IntegerField(default=0)   # Liczba ocen
 
     class Meta:
         managed = False
