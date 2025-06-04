@@ -2,12 +2,11 @@ import React from 'react';
 import styles from './home.module.css'
 import '../../styles/index.css'
 import Searchbar from "../../components/common/Searchbar/Searchbar.jsx";
+import Navigation from '../../components/layout/Navigation/Navigation.jsx'; // dodaj ten import
 import logo from '../../assets/logo5.jpg';
 import {Link} from "react-router-dom";
 
-
 export default function Home() {
-
     return (
         <div className={styles.container}>
             <div className={styles.footer}>
@@ -37,44 +36,9 @@ export default function Home() {
                     <p>&copy; {new Date().getFullYear()} What's for dinner. All rights reserved.</p>
                 </div>
             </div>
-            <div className={styles.navigation}>
-                <div className={styles.minilogo}>
-                    <Link to="/">
-                        <h4>What's for dinner</h4>
-                    </Link>
-                </div>
-                <div className={styles["menu-bttn"]}>
-                    <ul>
-                        <li>
-                            <a href="/discover">
-                                <button type="button">Discover</button>
-                            </a>
-                        </li>
-                        <li>
-                        <button>Contact</button>
-                        </li>
-                        <li>
-                            <button>About</button>
-                        </li>
-                    </ul>
-                </div>
-                <div className={styles["login-bttn"]}>
-                    <ul>
-                        <li>
-                            <label className={styles.switch}>
-                                <input type="checkbox"
-                                />
-                                <span className={`${styles.slider} ${styles.round}`}></span>
-                            </label>
-                        </li>
-                        <li>
-                            <a href="/login">
-                                <button type="button">Login</button>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
+            <Navigation />
+
             <div className={styles.logo}>
                 <img className={styles["logo-picture"]} src={logo} />
             </div>

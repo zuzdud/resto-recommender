@@ -31,7 +31,7 @@
     text-shadow: 0 0 10px #eb8a8a;
     font-family: 'HarlowSolidItalic', cursive;
     font-size: 30px;
-    white-space: nowrap;
+    width: 50%
 }
 .minilogo a {
     text-decoration: none; /* usuń podkreślenie */
@@ -67,14 +67,14 @@
 }
 
 .menu-bttn button:hover {
-    background-color: #eda1a1;
+    background-color: #345540;
     border-radius: 20px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    box-shadow: 0 0 10px #662222;
-    color: #662222;
+    box-shadow: 0 0 10px #345540;
+    color: white;
 }
 
 /* Przycisk logowania */

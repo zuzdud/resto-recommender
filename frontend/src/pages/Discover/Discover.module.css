@@ -7,6 +7,7 @@
     ". Area Area Area ."  /* lub zostaw środek szerszy */
     "footer footer footer footer footer";
     /* reszta bez zmian */
+    background-color: #F9FAF5;
 }
 
 .Footer {
@@ -15,6 +16,7 @@
 
 .Navigation {
     grid-area: Navigation;
+    background-color: #F9FAF5;
 }
 
 .Area {
@@ -22,7 +24,12 @@
     /* Usuń wszystkie grid properties! */
     min-height: 82vh;
     margin-bottom: 40px;
+    background-color: #F9FAF5;
 
+}
+
+.body{
+    background-color: #F9FAF5;
 }
 
 

@@ -2,12 +2,13 @@
 .searchContainer {
     margin-left: 300px;
     margin-right: 300px;
+    margin-bottom: 20px;
 }
 
 /* Wpisywany tekst */
 .searchContainer input[type=text] {
-    background-color: #662222;
-    color: white;
+    background-color: white;
+    color: #662222;
     padding: 10px;
     border-radius: 15px;
     border: none;

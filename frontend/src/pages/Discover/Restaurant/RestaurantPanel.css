@@ -6,9 +6,18 @@
    PODSTAWOWE STYLE
    ============= */
 .restaurant-panel {
-    background-color: #F9FAF5;
-    padding: 20px;
+    background-color: #ffffff;
+
     min-height: 100vh;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px #d44f4f;
+    max-width: 1200px;
+
+    padding: 40px 50px;
+    justify-content: center; /* Wyśrodkowanie w pionie */
+    align-items: center; /* Wyśrodkowanie w poziomie */
+    margin-left: 90px;
+    margin-right: 90px;
 }
 
 .panel-header {
@@ -28,6 +37,13 @@
     margin: 0 auto;
 }
 
+.chess-pannel {
+    height: 20px;
+    background: conic-gradient(from 90deg at 50% 50%, #662222 0deg, #662222 90deg, #fff 90deg, #fff 180deg, #662222 180deg, #662222 270deg, #fff 270deg, #fff 360deg ); background-size: 20px 20px;
+    margin: 15px 0;
+
+}
+
 /* =============
    SEKCJE RESTAURACJI
    ============= */
@@ -36,7 +52,8 @@
     background: white;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding-bottom:0px;
+
 }
 
 .section-header {

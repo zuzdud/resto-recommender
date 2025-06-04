@@ -9,7 +9,7 @@ function Navigation() {
         <div className={styles.navigation}>
             <div className={styles.minilogo}>
                 <Link to="/">
-                    <h4>What's for dinner</h4>
+                    <h4>What's for dinner?</h4>
                 </Link>
             </div>
             <div className={styles["menu-bttn"]}>

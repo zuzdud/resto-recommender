@@ -257,6 +257,8 @@ const RestaurantPanel = () => {
                 <h2>Discover New Flavors. Find Your Next Favorite Spot.</h2>
             </div>
 
+            <div className="chess-pannel"><p></p></div>
+
             <div className="panel-content">
                 {sections.map((section, index) => (
                     <RestaurantSection
