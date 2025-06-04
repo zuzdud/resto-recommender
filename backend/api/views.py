@@ -399,3 +399,19 @@ class UserFavoriteRestaurantsBySurnameView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=500)
+class RestaurantDetailByIdView(APIView):
+    """Zwraca szczegóły restauracji z bazy danych po ID jako string"""
+
+    def get(self, request, id):
+        try:
+            restaurant = Restaurants.objects.get(id=id)
+            serialized = RestaurantsSerializer(restaurant)
+            return Response(serialized.data)
+        except Restaurants.DoesNotExist:
+            return Response({"error": "Restaurant not found"}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+# class RestaurantDetailByIdView(APIView):
+#     queryset = Restaurants.objects.all()
+#     serializer_class = RestaurantSerializer
+#     lookup_field = 'id'

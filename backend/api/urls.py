@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 from .views import get_restaurants, ClientsListView, FavoritesListView, LoginAttemptsListView, PreferencesListView, \
     RatingsListView, RestaurantsListView, api_root, RecentRestaurantsView, \
     TopRatedRestaurantsDBView, RestaurantByCuisineDBView, TopRatedRestaurantsAPIView, \
-    RestaurantByCuisineAPIView, ClientBySurnameView, ClientFavoritesView, UserFavoriteRestaurantsBySurnameView
+    RestaurantByCuisineAPIView, ClientBySurnameView, ClientFavoritesView, UserFavoriteRestaurantsBySurnameView, \
+    RestaurantDetailByIdView
 
 urlpatterns = [
     path('',api_root),
@@ -18,7 +19,7 @@ urlpatterns = [
     path('restaurants/', RestaurantsListView.as_view(), name='restaurant-list'),
 
     # Restauracje z lokalnej bazy danych
-    path('restaurants/', RestaurantsListView.as_view(), name='restaurant-list'),
+    #path('restaurants/', RestaurantsListView.as_view(), name='restaurant-list'),
     path('restaurants/db/top-rated/', TopRatedRestaurantsDBView.as_view(), name='top-rated-db'),
     path('restaurants/db/recent/', RecentRestaurantsView.as_view(), name='recent-db'),
     path('restaurants/db/cuisine/<str:cuisine>/', RestaurantByCuisineDBView.as_view(), name='by-cuisine-db'),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('restaurants/api/cuisine/<str:cuisine>/', RestaurantByCuisineAPIView.as_view(), name='by-cuisine-api'),
     path('api/clients/<str:surname>/', ClientBySurnameView.as_view(), name='client-by-surname'),
     #path('api/clients/<str:client_surname>/favorites/', ClientFavoritesView.as_view(), name='client-favorites'),
-    path('api/clients/<str:surname>/favorites/', UserFavoriteRestaurantsBySurnameView.as_view(), name='favorites-by-surname')
+    path('api/clients/<str:surname>/favorites/', UserFavoriteRestaurantsBySurnameView.as_view(), name='favorites-by-surname'),
+    path('restaurants/<str:id>/', RestaurantDetailByIdView.as_view(), name='restaurant-detail-by-id'),
 ]
