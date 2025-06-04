@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './RestaurantPanel.css';
 import axios from "axios";
-import default_pic from '../../../assets/default-pic.png';
+import default_pic from '../../../../assets/default-pic.png';
+import {useNavigate} from "react-router-dom";
 
 const RestaurantPanel = () => {
+    const navigate = useNavigate();
+
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
     const [sections, setSections] = useState([]);
@@ -151,6 +154,7 @@ const RestaurantPanel = () => {
 
         const handleRestaurantClick = (id) => {
             console.log('Clicked restaurant:', id);
+            navigate(`/restaurant/${id}`);
         };
 
         return (

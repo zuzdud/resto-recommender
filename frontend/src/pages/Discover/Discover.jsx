@@ -1,7 +1,7 @@
 import styles from "./Discover.module.css"
 import Footer from "../../components/layout/Footer/Footer.jsx";
 import Navigation from "../../components/layout/Navigation/Navigation.jsx";
-import RestaurantPanel from "./Restaurant/RestaurantPanel.jsx";
+import RestaurantPanel from "./Restaurant/RestaurantPanel/RestaurantPanel.jsx";
 
 import React from "react";
 import Searchbar from "../../components/common/Searchbar/Searchbar.jsx";

@@ -11,6 +11,7 @@ import React from "react";
 import Settings from "./pages/Profile/Settings.jsx";
 import ProfileOptions from "./pages/Profile/ProfileOptions.jsx";
 import Preference from "./pages/Profile/Preference/Preference.jsx";
+import RestaurantDetails from "./pages/Discover/Restaurant/RestaurantDetail/RestaurantDetails.jsx";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>} />
                     <Route path="/login" element={<Signpage/>} />
-                    <Route path="/discover" element={<Discover />} />
+                    <Route path="/discover" element={<Discover />}/>
+                    <Route path="/restaurant/:id" element={<RestaurantDetails />}></Route>
                     <Route path="/profile" element={<PrivateRoute />}>
                         <Route element={<ProfileLayout />}>
                             <Route index element={<ProfileOptions />} />
