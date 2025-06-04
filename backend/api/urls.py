@@ -2,8 +2,9 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from .views import get_restaurants, ClientsListView, FavoritesListView, LoginAttemptsListView, PreferencesListView, \
-    RatingsListView, RestaurantsListView, api_root, RestaurantByCuisineView, RecentRestaurantsView, \
-    TopRatedRestaurantsView, TopRatedRestaurantsDBView, RestaurantByCuisineDBView
+    RatingsListView, RestaurantsListView, api_root, RecentRestaurantsView, \
+    TopRatedRestaurantsDBView, RestaurantByCuisineDBView, TopRatedRestaurantsAPIView, \
+    RestaurantByCuisineAPIView
 
 urlpatterns = [
     path('',api_root),
@@ -23,6 +24,6 @@ urlpatterns = [
     path('restaurants/db/cuisine/<str:cuisine>/', RestaurantByCuisineDBView.as_view(), name='by-cuisine-db'),
 
     # Restauracje z Google Places API
-    path('restaurants/api/top-rated/', TopRatedRestaurantsView.as_view(), name='top-rated-api'),
-    path('restaurants/api/cuisine/<str:cuisine>/', RestaurantByCuisineView.as_view(), name='by-cuisine-api'),
+    path('restaurants/api/top-rated/', TopRatedRestaurantsAPIView.as_view(), name='top-rated-api'),
+    path('restaurants/api/cuisine/<str:cuisine>/', RestaurantByCuisineAPIView.as_view(), name='by-cuisine-api'),
 ]
