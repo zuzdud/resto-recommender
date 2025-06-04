@@ -1,11 +1,11 @@
 .container {
     display: grid;
-    grid-template-columns: 0.2fr 0.2fr 2.4fr 0.2fr 0.2fr; /* jak w home */
+    grid-template-columns: 0.2fr  2.4fr  0.2fr; /* jak w home */
     grid-template-rows: 0.01fr 2.2fr 0.3fr;
     grid-template-areas:
-    ". . Navigation . ."
-    ". Area Area Area ."  /* lub zostaw środek szerszy */
-    "footer footer footer footer footer";
+    " . Navigation . "
+    ".  Area  ."  /* lub zostaw środek szerszy */
+    "footer footer footer";
     /* reszta bez zmian */
     background-color: #F9FAF5;
 }
